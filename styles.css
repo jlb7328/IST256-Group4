@@ -1,1 +1,7 @@
-
+/* Body */
+body {
+  font-size: 16px;  /* Font size of 16 pixels */
+  line-height: 1.6;  /* Line height of 1.6 */
+  color: #041E42;  /* Penn State Navy Blue Color */
+  background-color: #FFFFFF;  /* White Background Color */
+}
