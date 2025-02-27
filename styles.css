@@ -5,3 +5,11 @@ body {
   color: #041E42;  /* Penn State Navy Blue Color */
   background-color: #FFFFFF;  /* White Background Color */
 }
+
+/* Header specific styles */
+header {
+    background-color: #041E42;  /* Penn State Navy Blue Color */ 
+    color: #FFFFFF;  /* White Background Color */
+    padding: 20px 0;  /* 20 pixel padding */
+    text-align: center;  /* Text aligns to center */
+}
