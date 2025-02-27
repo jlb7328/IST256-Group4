@@ -13,3 +13,14 @@ header {
     padding: 20px 0;  /* 20 pixel padding */
     text-align: center;  /* Text aligns to center */
 }
+
+/* Footer styles */
+footer {
+    background-color: #041E42;  /* sets the background color of the footer to Penn State Navy Blue */ 
+    color: #FFFFFF;  /* sets the text color to white */
+    text-align: center;  /* centers the text within the footer */
+    padding: 10px 0;  /* adds 10 pixels of padding on the top and bottom */
+    position: relative;  /* keeps the footer positioned relative to its normal place */
+    bottom: 0;  /* aligns the footer at the bottom */
+    width: 100%;  /* ensures the footer spans the entire width of the page */
+}
