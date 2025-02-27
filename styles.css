@@ -1,17 +1,17 @@
 /* Body */
 body {
-  font-size: 16px;  /* Font size of 16 pixels */
-  line-height: 1.6;  /* Line height of 1.6 */
-  color: #041E42;  /* Penn State Navy Blue Color */
-  background-color: #FFFFFF;  /* White Background Color */
+  font-size: 16px;  /* sets the base font size to 16 pixels */
+  line-height: 1.6;  /* defines the space between lines of text as 1.6 times the font size */
+  color: #041E42;  /* sets the text color to Penn State Navy Blue */
+  background-color: #FFFFFF;  /* sets the background color to white */
 }
 
 /* Header specific styles */
 header {
-    background-color: #041E42;  /* Penn State Navy Blue Color */ 
-    color: #FFFFFF;  /* White Background Color */
-    padding: 20px 0;  /* 20 pixel padding */
-    text-align: center;  /* Text aligns to center */
+    background-color: #041E42;  /* sets the background color of the header to Penn State Navy Blue */
+    color: #FFFFFF;  /* sets the text color to white for contrast */
+    padding: 20px 0;  /* adds 20 pixels of padding on the top and bottom */
+    text-align: center;  /* centers the text within the header */
 }
 
 /* Footer styles */
