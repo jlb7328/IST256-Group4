@@ -126,5 +126,23 @@ form div {
   margin-bottom: 15px;
 }
 
+/* Style for the Submit button */
+button {
+  background-color: #041E42;  /* Same as navigation bar */
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  width: 150px;  /* Fixed width for consistency */
+  align-self: center;  /* Aligns the button to the center */
+}
+
+button:hover {
+  background-color: #0056A3;  /* Lighter blue on hover */
+}
 
 
