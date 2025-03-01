@@ -25,58 +25,64 @@ footer {
   width: 100%;  /* ensures the footer spans the entire width of the page */     
 }
 
+/* Navigation links */
 nav {
   background-color: #041E42;  /* Matches the header/footer for consistency */
   padding: 10px 0;  /* Adds vertical padding */
 }
 
+/* Unordered Lists in nav */
 nav ul {
   list-style: none;  /* Removes default bullet points */
-  padding: 0;
-  margin: 0;
+  padding: 0; /* Better spacing and layout */
+  margin: 0;  /* Getting rid of unwanted space */
   display: flex;  /* Ensures all items are in a single row */
   justify-content: center;  /* Centers the menu horizontally */
   align-items: center;  /* Aligns items vertically */
 }
 
+/* List items in unordered list */
 nav ul li {
   margin: 0 15px;  /* Adds spacing between menu items */
 }
 
+/* Anchor elements inside list items */
 nav ul li a {
-  text-decoration: none;
+  text-decoration: none;  /* Removes text decorations */
   color: #FFFFFF;  /* White text for contrast */
-  font-weight: bold;
-  padding: 10px 15px;
+  font-weight: bold;  /* Emphasizes text */
+  padding: 10px 15px; /* 10 pixel padding top and bottom, 15 pixel padding left and right. */
   transition: background-color 0.3s ease-in-out;  /* Smooth hover effect */
 }
 
+/* User hovering over link elements */
 nav ul li a:hover {
   background-color: #0056A3;  /* Lighter Penn State Blue on hover */
-  border-radius: 5px;
+  border-radius: 5px; /* Rounded corners */
 }
 
 /* Special styling for the Sign-Up button */
 .signup-btn {
   background-color: #F04E30;  /* Distinct red color for visibility */
-  border-radius: 5px;
-  padding: 10px 15px;
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* 10 pixel padding top and bottom, 15 pixel padding left and right. */
 }
 
+/* User hovering over sign up button */
 .signup-btn:hover {
-  background-color: #D43F24;
+  background-color: #D43F24;  /* Lighter color */
 }
 
 /* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');  /* Poppins font */
 
 /* Apply font to the entire body */
 body {
     font-family: 'Poppins', sans-serif;  /* Sets Poppins as the primary font */
-    font-size: 16px;
-    line-height: 1.6;
-    color: #041E42;  
-    background-color: #FFFFFF;
+    font-size: 16px;  /* Size of font */
+    line-height: 1.6; /* Height of line */
+    color: #041E42; /* Sets the text color to Penn State Navy Blue */
+    background-color: #FFFFFF;  /* Sets the background color to white */
 }
 
 /* Header, Footer, and Navigation Font Styling */
@@ -87,7 +93,7 @@ header, footer, nav {
 
 /* Improve readability for paragraph text */
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Font family */
     font-weight: 400;  /* Regular weight for paragraphs */
 }
 
@@ -141,6 +147,7 @@ button {
   align-self: center;  /* Aligns the button to the center */
 }
 
+/* When user puts their mouse over button */
 button:hover {
   background-color: #0056A3;  /* Lighter blue on hover */
 }
