@@ -22,5 +22,7 @@ footer {
     padding: 10px 0;  /* adds 10 pixels of padding on the top and bottom */
     position: relative;  /* keeps the footer positioned relative to its normal place */
     bottom: 0;  /* aligns the footer at the bottom */
-    width: 100%;  /* ensures the footer spans the entire width of the page */
+    width: 100%;  /* ensures the footer spans the entire width of the page */     
 }
+
+/* Test */
