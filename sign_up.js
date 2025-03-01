@@ -24,11 +24,11 @@ function onClick(){
             
     }
     
-    if (age.value == "" && isNaN(age.value)){
+    if (age.value == "" || isNaN(age.value)){
             
     }
     
-    if (phone.value == "" && isNaN(phone.value)){
+    if (phone.value == "" || isNaN(phone.value)){
             
     }
     
