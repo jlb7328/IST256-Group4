@@ -28,7 +28,7 @@ function onClick(){
             
     }
     
-    if ((phone.value == "") && isNaN(phone.value)){
+    if (phone.value == "" && isNaN(phone.value)){
             
     }
     
