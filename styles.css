@@ -97,9 +97,31 @@ form {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  width: 600px;
+  width: 300px;
   padding: 30px;
   background-color: #f0f0f0;  /* Light gray background */
   border-radius: 8px;  /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
 }
+
+form label {
+  display: inline-block;
+  width: 100px;  /* Adjust as needed */
+  margin-right: 10px;
+}
+
+form input {
+  width: 100%;  /* Ensures the input takes the remaining space */
+  margin-bottom: 15px;
+  padding: 10px;  /* Ensures uniform padding */
+  border-radius: 4px;  /* Rounded corners */
+  border: 1px solid #ccc;  /* Light border */
+  box-sizing: border-box;  /* Ensures padding doesn't affect width */
+}
+
+form div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
