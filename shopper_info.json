@@ -1,1 +1,11 @@
-
+[
+    {
+        "user_name": "John Doe",
+        "user_email": "johndoe@email.com",
+        "acc_name": "JDshops",
+        "acc_password": "pass1234",
+        "user_age": 50,
+        "user_phone": "(555)555-5555",
+        "user_address": "123 Street Name"
+    }
+]
