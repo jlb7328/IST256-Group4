@@ -72,11 +72,12 @@
   </footer>
 
   <!-- Input to JSON Script -->
+  <!--
   <script>
     document.getElementById('userForm').addEventListener('submit'), function(e) {
-      e.preventDefault()}; // Prevent default form submission
-    
-      // Gather form data into an object
+      e.preventDefault(); // Prevent default form submission
+
+      // Collect the form data
       const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
@@ -86,7 +87,72 @@
         phone: document.getElementById('phone').value,
         address: document.getElementById('address').value
       };
-    </script>
+
+      // Convert the object to a JSON string
+      const jsonStr = JSON.stringify(formData);
+
+      // Send the JSON data to the server using fetch API
+      fetch('/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: jsonStr
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        alert(data);  // Notify the user that data was saved successfully
+      })
+      .catch(error => console.error('Error:', error));
+    };
+  </script>
+  This would potentially (not tested) work if the website were to be online instead. Since it is not there
+  is a simplified version below that will be used (wow this took forever)-->
+  <script>
+    const fs = require('fs');
+const filePath = 'shopper_info.json';
+
+const newEntry = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        confirmPassword: document.getElementById('confirmPassword').value,
+        age: document.getElementById('age').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value
+      };
+
+// Read the existing file
+fs.readFile(filePath, 'utf8', (err, data) => {
+  let jsonArray = [];
+
+  if (!err && data) {
+    try {
+      jsonArray = JSON.parse(data);
+      if (!Array.isArray(jsonArray)) {
+        jsonArray = [jsonArray]; // Ensure it's an array
+      }
+    } catch (parseErr) {
+      console.error('Error parsing JSON:', parseErr);
+      jsonArray = [];
+    }
+  }
+
+  // Append the new object
+  jsonArray.push(newEntry);
+
+  // Write back to the file
+  fs.writeFile(filePath, JSON.stringify(jsonArray, null, 2), (writeErr) => {
+    if (writeErr) {
+      console.error('Error writing file:', writeErr);
+    } else {
+      console.log('Data appended successfully!');
+    }
+  });
+});
+
+  </script>
 </body>
   
 </html>
