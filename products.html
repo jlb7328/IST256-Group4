@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
 <body>
     <header>
@@ -24,15 +25,51 @@
     <main>
         <section>
         <h2>Our Products</h2>
-        <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Cras maecenas ultricies pellentesque posuere netus primis erat class. Hac metus nostra montes ultrices mattis fusce suspendisse vel.</p>
-        <ul>
-            <li>Pellentesque rhoncus urna sed augue ligula cursus rutrum.</li>
-            <li>At praesent curae laoreet justo; mollis aenean.</li>
-            <li>Iaculis bibendum platea et justo dictumst ante urna.</li>
-        </ul>
+        <p>Explore our wide range of products below.</p>
+
+
         </section>
     </main>
     <footer>
         <p>&copy; 2025 Group 4. All Rights Reserved.</p>
     </footer>
+        <script>
+            $(document).ready(function(){
+                let products = [
+                    {
+                        name: "Banana Phone",
+                        id: 1,
+                        price: "$300",
+                        description: "This is a phone, that also packs a lot of potassium and is yellow."
+                    },
+                    {
+                        name: "Sausage Phone",
+                        id: 2,
+                        price: "$350",
+                        description: "This is a phone, that also packs a lot of protein and is meaty."
+                    },
+                    {
+                        name: "Pancake Phone",
+                        id: 3,
+                        price: "$400",
+                        description: "This is a phone, that also packs a lot of carbs and is fluffy."
+                    }
+                ];
+
+                function displayProducts(){
+                    $("#products").empty();
+                    products.forEach(product => {
+                        $("#products").append(`
+                            <div class="product">
+                                <h3>${product.name}</h3>
+                                <p>${product.price}</p>
+                                <p>${product.description}</p>
+                                <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+                            </div>
+                        `);
+                    });
+                }
+            });
+        </script>
 </body>
+</html>
