@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+<body>
+    <header>
+        <h1>Shopping Cart</h1>
+        <p>Created by Group 4</p>
+    </header>
+    <nav aria-label="Main Navigation">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about_us.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="sign_up.html" class="signup-btn">Sign Up</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section>
+        <h2>Shopping Cart</h2>
+        <p>Review the items in your cart below.</p>
+        <table id="cart">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <p id="total">Total: $0</p>
+        <button id="checkout">Checkout</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Group 4. All Rights Reserved.</p>
+    </footer>
+        <script>
+            $(document).ready(function(){
+                let cart = [];
+                let total = 0;
+                function displayCart(){
+                    $("#cart tbody").empty();
+                    cart.forEach(item => {
+                        let row = `<tr>
+                            <td>${item.name}</td>
+                            <td>${item.price}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.total}</td>
+                        </tr>`;
+                        $("#cart tbody").append(row);
+                    });
+                    $("#total").text(`Total: $${total}`);
+                }
+                $("#checkout").click(function(){
+                    alert("Thank you for your purchase!");
+                    cart = [];
+                    total = 0;
+                    displayCart();
+                });
+            });
+        </script>
+    </body>
