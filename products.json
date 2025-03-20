@@ -1,0 +1,181 @@
+[
+    {
+        "ProductId": "12345",
+        "ProductDescription": "High-quality wireless headphones",
+        "ProductCategory": "Electronics",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 99.99,
+        "ProductWeight": "0.5 kg"
+    }
+    ,
+    {
+        "ProductId": "23456",
+        "ProductDescription": "Smartphone with 6.5-inch display",
+        "ProductCategory": "Electronics",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 499.99,
+        "ProductWeight": "0.2 kg"
+    }
+    ,
+    {
+        "ProductId": "67890",
+        "ProductDescription": "Ergonomic office chair",
+        "ProductCategory": "Furniture",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 199.99,
+        "ProductWeight": "15 kg"
+    }
+    ,
+    {
+        "ProductId": "54321",
+        "ProductDescription": "Stainless steel kitchen sink",
+        "ProductCategory": "Kitchen",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 299.99,
+        "ProductWeight": "10 kg"
+    }
+    ,
+    {
+        "ProductId": "09876",
+        "ProductDescription": "Cotton bed sheets",
+        "ProductCategory": "Bedding",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 49.99,
+        "ProductWeight": "1 kg"
+    }
+    ,
+    {
+        "ProductId": "13579",
+        "ProductDescription": "Set of 6 ceramic dinner plates",
+        "ProductCategory": "Kitchen",
+        "ProductUnitOfMeasure": "Set",
+        "ProductPrice": 29.99,
+        "ProductWeight": "5 kg"
+    }
+    ,
+    {
+        "ProductId": "24680",
+        "ProductDescription": "Wooden coffee table",
+        "ProductCategory": "Furniture",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 149.99,
+        "ProductWeight": "20 kg"
+    }
+    ,
+    {
+        "ProductId": "11223",
+        "ProductDescription": "Stainless steel refrigerator",
+        "ProductCategory": "Appliances",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 799.99,
+        "ProductWeight": "50 kg"
+    }
+    ,
+    {
+        "ProductId": "33445",
+        "ProductDescription": "Set of 4 cotton bath towels",
+        "ProductCategory": "Bedding",
+        "ProductUnitOfMeasure": "Set",
+        "ProductPrice": 19.99,
+        "ProductWeight": "2 kg"
+    }
+    ,
+    {
+        "ProductId": "55667",
+        "ProductDescription": "Leather sofa",
+        "ProductCategory": "Furniture",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 999.99,
+        "ProductWeight": "40 kg"
+    }
+    ,
+    {
+        "ProductId": "77889",
+        "ProductDescription": "Smart TV with 55-inch display",
+        "ProductCategory": "Electronics",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 799.99,
+        "ProductWeight": "30 kg"
+    }
+    ,
+    {
+        "ProductId": "99001",
+        "ProductDescription": "Set of 6 stainless steel kitchen knives",
+        "ProductCategory": "Kitchen",
+        "ProductUnitOfMeasure": "Set",
+        "ProductPrice": 39.99,
+        "ProductWeight": "3 kg"
+    }
+    ,
+    {
+        "ProductId": "22334",
+        "ProductDescription": "Cotton bathrobe",
+        "ProductCategory": "Bedding",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 29.99,
+        "ProductWeight": "1 kg"
+    }
+    ,
+    {
+        "ProductId": "44556",
+        "ProductDescription": "Wooden dining table",
+        "ProductCategory": "Furniture",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 399.99,
+        "ProductWeight": "30 kg"
+    }
+    ,
+    {
+        "ProductId": "66778",
+        "ProductDescription": "Stainless steel dishwasher",
+        "ProductCategory": "Appliances",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 499.99,
+        "ProductWeight": "40 kg"
+    }
+    ,
+    {
+        "ProductId": "88990",
+        "ProductDescription": "Set of 6 ceramic coffee mugs",
+        "ProductCategory": "Kitchen",
+        "ProductUnitOfMeasure": "Set",
+        "ProductPrice": 19.99,
+        "ProductWeight": "2 kg"
+    }
+    ,
+    {
+        "ProductId": "00112",
+        "ProductDescription": "Leather armchair",
+        "ProductCategory": "Furniture",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 199.99,
+        "ProductWeight": "15 kg"
+    }
+    ,
+    {
+        "ProductId": "22334",
+        "ProductDescription": "Cotton bathrobe",
+        "ProductCategory": "Bedding",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 29.99,
+        "ProductWeight": "1 kg"
+    }
+    ,
+    {
+        "ProductId": "55678",
+        "ProductDescription": "Electric standing desk",
+        "ProductCategory": "Furniture",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 299.99,
+        "ProductWeight": "25 kg"
+    }
+    ,
+    {
+        "ProductId": "77890",
+        "ProductDescription": "Smart TV with 65-inch display",
+        "ProductCategory": "Electronics",
+        "ProductUnitOfMeasure": "Piece",
+        "ProductPrice": 999.99,
+        "ProductWeight": "40 kg"
+    }
+]
