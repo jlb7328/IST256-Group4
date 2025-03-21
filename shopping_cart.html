@@ -86,15 +86,15 @@
 
 
                     const productMap = {};
-                    products.foreach(product => {
+                    products.forEach(product => {
                         productMap[product.ProductId] = product;
                     });
 
                     let total = 0;
                     $("#cart tbody").empty();
 
-                    cart.foreach(item => {
-                        const product = productMap[item.ProductId];
+                    cart.forEach(cartItem => {
+                        const product = productMap[cartItem.ProductId];
 
                         if(product){
                             const quantity = cartItem.Quantity;
