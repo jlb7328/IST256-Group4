@@ -83,16 +83,40 @@
                     $("#cart tbody").empty();
 
                     cart.foreach(item => {
-                        let product = productMap[item.ProductId];
-                        let row = `<tr>
-                            <td>${product.ProductName}</td>
-                            <td>${product.Price}</td>
-                            <td>${item.Quantity}</td>
-                            <td>${product.Price * item.Quantity}</td>
-                        </tr>`;
-                        $("#cart tbody").append(row);
-                        total += product.Price * item.Quantity;
+                        const product = productMap[item.ProductId];
+
+                        if(product){
+                            const quantity = cartItem.Quantity;
+                            const price = parseFloat(product.ProductPrice);
+                            const itemTotal = (quantity * price).toFixed(2);
+                            total += parseFloat(itemTotal);
+
+                            const row = `<tr>
+                                <td>${product.ProductDescription}</td>
+                                <td>${price.toFixed(2)}</td>
+                                <td>${quantity}</td>
+                                <td>${itemTotal}</td>
+                            </tr>`;
+                            $("#cart tbody").append(row);
+                        }
+
                     });
+
+                    $("#total").text(`Total: $${total.toFixed(2)}`);
+
+                $("#checkout").click(function(){
+                    if(cart.length === 0){
+                        alert("Your cart is empty!");
+                        return;
+                    }
+
+                    alert("Thank you for your purchase!");
+                    sessionStorage.removeItem("cart");
+                    $("#cart tbody").empty();
+                    $("#total").text("Total: $0");
+                });
+
+
                 }
            })
         </script>
