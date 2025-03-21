@@ -70,6 +70,30 @@
                 });
             });
             */
-           $(document).ready(function(){})
+           $(document).ready(function(){
+                let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+
+                $.getJSON('products.json', function(products)){
+                    const productMap = {};
+                    products.foreach(product => {
+                        productMap[product.ProductId] = product;
+                    });
+
+                    let total = 0;
+                    $("#cart tbody").empty();
+
+                    cart.foreach(item => {
+                        let product = productMap[item.ProductId];
+                        let row = `<tr>
+                            <td>${product.ProductName}</td>
+                            <td>${product.Price}</td>
+                            <td>${item.Quantity}</td>
+                            <td>${product.Price * item.Quantity}</td>
+                        </tr>`;
+                        $("#cart tbody").append(row);
+                        total += product.Price * item.Quantity;
+                    });
+                }
+           })
         </script>
     </body>
