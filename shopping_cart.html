@@ -73,7 +73,18 @@
            $(document).ready(function(){
                 let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
 
-                $.getJSON('products.json', function(products){
+                $.getJSON('products.json', function(products) {
+
+                    //Debugging
+                    console.log("Products data loaded:", products);
+
+                    //Check that it is an array prior to loading.
+                    if (!Array.isArray(products)) {
+                        console.error("Products.json data is not an array.");
+                        return;
+                    }
+
+
                     const productMap = {};
                     products.foreach(product => {
                         productMap[product.ProductId] = product;
