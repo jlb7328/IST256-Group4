@@ -153,15 +153,6 @@
     }
     ,
     {
-        "ProductId": "22334",
-        "ProductDescription": "Cotton bathrobe",
-        "ProductCategory": "Bedding",
-        "ProductUnitOfMeasure": "Piece",
-        "ProductPrice": 29.99,
-        "ProductWeight": "1 kg"
-    }
-    ,
-    {
         "ProductId": "55678",
         "ProductDescription": "Electric standing desk",
         "ProductCategory": "Furniture",
@@ -169,13 +160,5 @@
         "ProductPrice": 299.99,
         "ProductWeight": "25 kg"
     }
-    ,
-    {
-        "ProductId": "77890",
-        "ProductDescription": "Smart TV with 65-inch display",
-        "ProductCategory": "Electronics",
-        "ProductUnitOfMeasure": "Piece",
-        "ProductPrice": 999.99,
-        "ProductWeight": "40 kg"
-    }
+
 ]
