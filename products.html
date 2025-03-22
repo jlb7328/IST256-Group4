@@ -50,49 +50,65 @@
                 products.forEach(product => {
                     $("#product-list").append(`
                         <li>
-                            <h3>${product.name}</h3>
-                            <p>${product.description}</p>
-                            <p><strong>Category:</strong> ${product.category}</p>
-                            <p><strong>Unit:</strong> ${product.unit}</p>
-                            <p><strong>Price:</strong> ${product.price}</p>
-                            ${product.image ? `<img src="${product.image}" alt="${product.name}" style="max-width:150px;">` : ""}
+                            <h3>${product.ProductDescription}</h3>
+                            <p><strong>Category:</strong> ${product.ProductCategory}</p>
+                            <p><strong>Unit:</strong> ${product.ProductUnitOfMeasure}</p>
+                            <p><strong>Weight:</strong> ${product.ProductWeight}</p>
+                            <p><strong>Price:</strong> $${product.ProductPrice.toFixed(2)}</p>
+                            <button class="add-to-cart" data-id="${product.ProductId}">Add to Cart</button>
                         </li>
                     `);
                 });
             }
 
-    $(document).ready(function() {
-        // Load products from JSON file
-        $.getJSON("products.json", function(data) {
-            productData = data;
-            renderProductList(productData);
+            function addToCart(productId) {
+                let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+                const existing = cart.find(item => item.ProductId === productId);
 
-        // Build autocomplete array
-        let productNames = data.map(p => p.name);
-        $("#search-product").autocomplete({
-          source: productNames,
-          select: function(event, ui) {
-            let selected = data.find(p => p.name === ui.item.value);
-            if (selected) {
-              $("#search-result").html(`
-                <div>
-                  <h3>${selected.name}</h3>
-                  <p>${selected.description}</p>
-                  <p><strong>Category:</strong> ${selected.category}</p>
-                  <p><strong>Unit:</strong> ${selected.unit}</p>
-                  <p><strong>Price:</strong> ${selected.price}</p>
-                  ${selected.image ? `<img src="${selected.image}" alt="${selected.name}" style="max-width:150px;">` : ""}
-                </div>
-              `);
-              $("html, body").animate({
-                scrollTop: $("#search-result").offset().top
-              }, 500);
+                if (existing) {
+                    existing.Quantity += 1;
+                } else {
+                    cart.push({ ProductId: productId, Quantity: 1 });
+                }
+
+                sessionStorage.setItem("cart", JSON.stringify(cart));
+                alert("Item added to cart!");
             }
-          }
-        });
-      });
-    });
 
+            $(document).ready(function () {
+                $.getJSON("products.json", function (data) {
+                    productData = data;
+                    renderProductList(productData);
+
+                    const productNames = data.map(p => p.ProductDescription);
+                    $("#search-product").autocomplete({
+                        source: productNames,
+                        select: function (event, ui) {
+                            const selected = data.find(p => p.ProductDescription === ui.item.value);
+                            if (selected) {
+                            $("#search-result").html(`
+                                    <div>
+                                        <h3>${selected.ProductDescription}</h3>
+                                        <p><strong>Category:</strong> ${selected.ProductCategory}</p>
+                                        <p><strong>Unit:</strong> ${selected.ProductUnitOfMeasure}</p>
+                                        <p><strong>Weight:</strong> ${selected.ProductWeight}</p>
+                                        <p><strong>Price:</strong> $${selected.ProductPrice.toFixed(2)}</p>
+                                        <button class="add-to-cart" data-id="${selected.ProductId}">Add to Cart</button>
+                                    </div>
+                                `);
+                                $("html, body").animate({
+                                    scrollTop: $("#search-result").offset().top
+                                }, 500);
+                            }
+                        }
+                    });
+                });
+
+                $(document).on("click", ".add-to-cart", function () {
+                    const productId = $(this).data("id");
+                    addToCart(productId);
+                });
+            });
     </script>
 </body>
 </html>
