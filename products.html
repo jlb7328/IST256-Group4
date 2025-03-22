@@ -49,14 +49,17 @@
                 $("#product-list").empty();
                 products.forEach(product => {
                     $("#product-list").append(`
-                        <li>
+                        <div class="product-item">
                             <h3>${product.ProductDescription}</h3>
                             <p><strong>Category:</strong> ${product.ProductCategory}</p>
                             <p><strong>Unit:</strong> ${product.ProductUnitOfMeasure}</p>
                             <p><strong>Weight:</strong> ${product.ProductWeight}</p>
                             <p><strong>Price:</strong> $${product.ProductPrice.toFixed(2)}</p>
+                            <p>${product.ProductImage ? `<img src="${product.ProductImage}" alt="${product.ProductDescription}" style="max-width:150px;">` : ""}<p>
+                            <br>
                             <button class="add-to-cart" data-id="${product.ProductId}">Add to Cart</button>
-                        </li>
+                            <hr>
+                            </div>
                     `);
                 });
             }
