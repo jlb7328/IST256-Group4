@@ -152,4 +152,23 @@ button:hover {
   background-color: #0056A3;  /* Lighter blue on hover */
 }
 
+/* Increase/Decrease button */
+button.increase,
+button.decrease {
+    padding: 2px 6px;
+    margin: 0 4px;
+    font-size: 14px;
+    line-height: 1;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.increase:hover,
+button.decrease:hover {
+    background-color: #0056A3;
+}
+
 

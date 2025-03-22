@@ -89,7 +89,11 @@
                             const row = `<tr>
                                 <td>${product.ProductDescription}</td>
                                 <td>${formattedPrice}</td>
-                                <td>${quantity}</td>
+                                <td>
+                                    <button class="decrease" data-id="${product.ProductId}">-</button>
+                                    ${quantity}
+                                    <button class="increase" data-id="${product.ProductId}">+</button>
+                                </td>
                                 <td>${formattedTotal}</td>
                             </tr>`;
 
@@ -97,6 +101,18 @@
                             $("#cart tbody").append(row);
                         }
 
+                    });
+
+                    //Increase the quantity of a product in the cart
+                    $(".increase").click(function(){
+                        const ProductId = $(this).data("id");
+                        updateQuantity(ProductId, 1);
+                    });
+                    
+                    //Decrease the quantity of a product in the cart
+                    $(".decrease").click(function(){
+                        const ProductId = $(this).data("id");
+                        updateQuantity(ProductId, -1);
                     });
 
                     $("#total").text(`Total: $${total.toFixed(2)}`);
@@ -115,6 +131,24 @@
 
 
                 });
+
+                function updateQuantity(productId, change) {
+                    let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+
+                    const index = cart.findIndex(item => item.ProductId === productId);
+                    if(index > -1){
+                        cart[index].Quantity += change;
+                        
+                        //Removes the item if the quantity is 0(or less)
+                        if(cart[index].Quantity <= 0){
+                            cart.splice(index, 1);
+                        }
+
+                        sessionStorage.setItem("cart", JSON.stringify(cart));
+                        location.reload();//Reloads to show the updated cart
+                    }
+                }
+
            });
         </script>
     </body>
