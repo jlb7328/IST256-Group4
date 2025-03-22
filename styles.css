@@ -153,22 +153,37 @@ button:hover {
 }
 
 /* Increase/Decrease button */
-button.increase,
-button.decrease {
+#cart button.increase,
+#cart button.decrease {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 2px 6px;
-    margin: 0 4px;
-    font-size: 14px;
-    line-height: 1;
-    background-color: #004080;
+    margin: 0 3px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #003366;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 28px;
+    height: 28px;
+    line-height: 1;
+    text-align: center;
+    box-sizing: border-box;
 }
 
-button.increase:hover,
-button.decrease:hover {
+#cart button.increase:hover,
+#cart button.decrease:hover {
     background-color: #0056A3;
+}
+
+.qty-number {
+  min-width: 20px;
+  text-align: center;
+  display: inline-block;
 }
 
 

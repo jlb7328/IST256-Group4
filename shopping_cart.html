@@ -104,18 +104,18 @@
                     });
 
                     //Increase the quantity of a product in the cart
-                    $(".increase").click(function(){
-                        const ProductId = $(this).data("id");
-                        updateQuantity(ProductId, 1);
+                    $(document).on("click", ".increase", function(){
+                        const productId = $(this).data("id");
+                        updateQuantity(productId, 1);
                     });
                     
                     //Decrease the quantity of a product in the cart
-                    $(".decrease").click(function(){
-                        const ProductId = $(this).data("id");
-                        updateQuantity(ProductId, -1);
+                    $(document).on("click", ".decrease", function(){
+                        const productId = $(this).data("id");
+                        updateQuantity(productId, -1);
                     });
 
-                    $("#total").text(`Total: $${total.toFixed(2)}`);
+                    $("#total").text(`Total: ${total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`);
 
                 $("#checkout").click(function(){
                     if(cart.length === 0){
