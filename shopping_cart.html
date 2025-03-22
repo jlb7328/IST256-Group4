@@ -45,31 +45,6 @@
         <p>&copy; 2025 Group 4. All Rights Reserved.</p>
     </footer>
         <script>
-            /* Commenting this out to try to update this function to use jQuery and grab the products from the json file.
-            $(document).ready(function(){
-                let cart = [];
-                let total = 0;
-                function displayCart(){
-                    $("#cart tbody").empty();
-                    cart.forEach(item => {
-                        let row = `<tr>
-                            <td>${item.name}</td>
-                            <td>${item.price}</td>
-                            <td>${item.quantity}</td>
-                            <td>${item.total}</td>
-                        </tr>`;
-                        $("#cart tbody").append(row);
-                    });
-                    $("#total").text(`Total: $${total}`);
-                }
-                $("#checkout").click(function(){
-                    alert("Thank you for your purchase!");
-                    cart = [];
-                    total = 0;
-                    displayCart();
-                });
-            });
-            */
            $(document).ready(function(){
                 let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
 
@@ -92,6 +67,12 @@
 
                     let total = 0;
                     $("#cart tbody").empty();
+
+                    if (cart.length === 0) {
+                        $("#cart tbody").append('<tr><td colspan="4">Your cart is empty.</td></tr>');
+                        $("#total").text("Total: $0");
+                        return;
+                    }       
 
                     cart.forEach(cartItem => {
                         const product = productMap[cartItem.ProductId];
