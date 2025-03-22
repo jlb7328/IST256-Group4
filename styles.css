@@ -193,7 +193,7 @@ button:hover {
   justify-content: center;
   padding: 2px 6px;
   margin: 0 3px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   background-color: #F04E30;
   color: white;
@@ -209,6 +209,7 @@ button:hover {
 #cart button.remove-item:hover {
   background-color: #D43F24;
 }
+
 
 
 

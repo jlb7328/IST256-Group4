@@ -92,11 +92,11 @@
                                 <td>${formattedPrice}</td>
                                 <td>
                                     <button class="decrease" data-id="${product.ProductId}">-</button>
-                                    ${quantity}
+                                    <span class="qty-number">${quantity}</span>
                                     <button class="increase" data-id="${product.ProductId}">+</button>
                                 </td>
                                 <td>${formattedTotal}</td>
-                                <td><button class="remove" data-id="${product.ProductId}">Remove</button></td>
+                                <td><button class="remove-item" data-id="${product.ProductId}">x</button></td>
                             </tr>`;
 
 
@@ -107,23 +107,9 @@
 
 
                     $("#total").text(`Total: ${total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`);
-
-                $("#checkout").click(function(){
-                    if(cart.length === 0){
-                        alert("Your cart is empty!");
-                        return;
-                    }
-
-                    alert("Thank you for your purchase!");
-                    sessionStorage.removeItem("cart");
-                    $("#cart tbody").empty().append('<tr><td colspan="4">Your order has been placed successfully.</td></tr>');
-                    $("#total").text("Total: $0");
                 });
 
-
-                });
-
-                function updateQuantity(productId, change) {
+                    function updateQuantity(productId, change) {
                     let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
 
                     const index = cart.findIndex(item => item.ProductId === productId);
@@ -139,31 +125,41 @@
                         location.reload();//Reloads to show the updated cart
                     }
                 }
+            
+                $(document).on("click", ".increase", function () {
+                    const productId = $(this).data("id");
+                    updateQuantity(productId, 1);
+                });
 
-           });
+                $(document).on("click", ".decrease", function () {
+                    const productId = $(this).data("id");
+                    updateQuantity(productId, -1);
+                });
 
-            //Increase quantity
-            $(document).on("click", ".increase", function(){
-                const productId = $(this).data("id");
-                updateQuantity(productId, 1);
-            });
+                $(document).on("click", ".remove-item", function () {
+                    const productId = $(this).data("id");
+                    let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+                    cart = cart.filter(item => item.ProductId !== productId);
 
-            //Decrease quantity
-            $(document).on("click", ".decrease", function(){
-                const productId = $(this).data("id");
-                updateQuantity(productId, -1);
-            });
+                    sessionStorage.setItem("cart", JSON.stringify(cart));
+                    location.reload();
+                });
 
-            //Remove item
-            $(document).on("click", ".remove", function(){
-                const productId = $(this).data("id");
 
-                let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-                cart = cart.filter(item => item.ProductId !== productId);
+                $("#checkout").click(function(){
+                    if(cart.length === 0){
+                        alert("Your cart is empty!");
+                        return;
+                    }
 
-                sessionStorage.setItem("cart", JSON.stringify(cart));
-                location.reload();
-            });
+                    alert("Thank you for your purchase!");
+                    sessionStorage.removeItem("cart");
+                    $("#cart tbody").empty().append('<tr><td colspan="4">Your order has been placed successfully.</td></tr>');
+                    $("#total").text("Total: $0");
+                });
+
+
+                });
 
         </script>
     </body>
