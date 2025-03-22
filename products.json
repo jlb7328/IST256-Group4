@@ -5,7 +5,8 @@
         "ProductCategory": "Electronics",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 99.99,
-        "ProductWeight": "0.5 kg"
+        "ProductWeight": "0.5 kg",
+        "ProductImage": "images/headphones.jpg"
     }
     ,
     {
@@ -14,7 +15,8 @@
         "ProductCategory": "Electronics",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 499.99,
-        "ProductWeight": "0.2 kg"
+        "ProductWeight": "0.2 kg",
+        "ProductImage": "images/smartphone.jpg"
     }
     ,
     {
@@ -23,7 +25,8 @@
         "ProductCategory": "Furniture",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 199.99,
-        "ProductWeight": "15 kg"
+        "ProductWeight": "15 kg",
+        "ProductImage": "images/office_chair.jpg"
     }
     ,
     {
@@ -32,7 +35,8 @@
         "ProductCategory": "Kitchen",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 299.99,
-        "ProductWeight": "10 kg"
+        "ProductWeight": "10 kg",
+        "ProductImage": "images/kitchen_sink.jpg"
     }
     ,
     {
@@ -41,7 +45,8 @@
         "ProductCategory": "Bedding",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 49.99,
-        "ProductWeight": "1 kg"
+        "ProductWeight": "1 kg",
+        "ProductImage": "images/bed_sheets.jpg"
     }
     ,
     {
@@ -50,7 +55,8 @@
         "ProductCategory": "Kitchen",
         "ProductUnitOfMeasure": "Set",
         "ProductPrice": 29.99,
-        "ProductWeight": "5 kg"
+        "ProductWeight": "5 kg",
+        "ProductImage": "images/dinner_plates.jpg"
     }
     ,
     {
@@ -59,7 +65,8 @@
         "ProductCategory": "Furniture",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 149.99,
-        "ProductWeight": "20 kg"
+        "ProductWeight": "20 kg",
+        "ProductImage": "images/coffee_table.jpg"
     }
     ,
     {
@@ -68,7 +75,8 @@
         "ProductCategory": "Appliances",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 799.99,
-        "ProductWeight": "50 kg"
+        "ProductWeight": "50 kg",
+        "ProductImage": "images/fridge.jpg"
     }
     ,
     {
@@ -77,7 +85,8 @@
         "ProductCategory": "Bedding",
         "ProductUnitOfMeasure": "Set",
         "ProductPrice": 19.99,
-        "ProductWeight": "2 kg"
+        "ProductWeight": "2 kg",
+        "ProductImage": "images/bath_towels.jpg"
     }
     ,
     {
@@ -86,7 +95,8 @@
         "ProductCategory": "Furniture",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 999.99,
-        "ProductWeight": "40 kg"
+        "ProductWeight": "40 kg",
+        "ProductImage": "images/sofa.jpg"
     }
     ,
     {
@@ -95,7 +105,8 @@
         "ProductCategory": "Electronics",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 799.99,
-        "ProductWeight": "30 kg"
+        "ProductWeight": "30 kg",
+        "ProductImage": "images/tv.jpg"
     }
     ,
     {
@@ -104,7 +115,8 @@
         "ProductCategory": "Kitchen",
         "ProductUnitOfMeasure": "Set",
         "ProductPrice": 39.99,
-        "ProductWeight": "3 kg"
+        "ProductWeight": "3 kg",
+        "ProductImage": "images/knives.jpg"
     }
     ,
     {
@@ -113,7 +125,8 @@
         "ProductCategory": "Bedding",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 29.99,
-        "ProductWeight": "1 kg"
+        "ProductWeight": "1 kg",
+        "ProductImage": "images/robe.jpg"
     }
     ,
     {
@@ -122,7 +135,8 @@
         "ProductCategory": "Furniture",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 399.99,
-        "ProductWeight": "30 kg"
+        "ProductWeight": "30 kg",
+        "ProductImage": "images/dining_table.jpg"
     }
     ,
     {
@@ -131,7 +145,8 @@
         "ProductCategory": "Appliances",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 499.99,
-        "ProductWeight": "40 kg"
+        "ProductWeight": "40 kg",
+        "ProductImage": "images/dishwasher.jpg"
     }
     ,
     {
@@ -140,7 +155,8 @@
         "ProductCategory": "Kitchen",
         "ProductUnitOfMeasure": "Set",
         "ProductPrice": 19.99,
-        "ProductWeight": "2 kg"
+        "ProductWeight": "2 kg",
+        "ProductImage": "images/mugs.jpg"
     }
     ,
     {
@@ -149,7 +165,8 @@
         "ProductCategory": "Furniture",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 199.99,
-        "ProductWeight": "15 kg"
+        "ProductWeight": "15 kg",
+        "ProductImage": "images/chair.jpg"
     }
     ,
     {
@@ -158,7 +175,8 @@
         "ProductCategory": "Furniture",
         "ProductUnitOfMeasure": "Piece",
         "ProductPrice": 299.99,
-        "ProductWeight": "25 kg"
+        "ProductWeight": "25 kg",
+        "ProductImage": "images/desk.jpg"
     }
 
 ]
