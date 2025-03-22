@@ -83,12 +83,17 @@
                             const itemTotal = (quantity * price).toFixed(2);
                             total += parseFloat(itemTotal);
 
+                            const formattedPrice = price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                            const formattedTotal = parseFloat(itemTotal).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
                             const row = `<tr>
                                 <td>${product.ProductDescription}</td>
-                                <td>${price.toFixed(2)}</td>
+                                <td>${formattedPrice}</td>
                                 <td>${quantity}</td>
-                                <td>${itemTotal}</td>
+                                <td>${formattedTotal}</td>
                             </tr>`;
+
+
                             $("#cart tbody").append(row);
                         }
 
@@ -104,7 +109,7 @@
 
                     alert("Thank you for your purchase!");
                     sessionStorage.removeItem("cart");
-                    $("#cart tbody").empty();
+                    $("#cart tbody").empty().append('<tr><td colspan="4">Your order has been placed successfully.</td></tr>');
                     $("#total").text("Total: $0");
                 });
 
