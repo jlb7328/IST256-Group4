@@ -186,4 +186,29 @@ button:hover {
   display: inline-block;
 }
 
+#cart button.remove-item {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  margin: 0 3px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #F04E30;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+#cart button.remove-item:hover {
+  background-color: #D43F24;
+}
+
+
 
