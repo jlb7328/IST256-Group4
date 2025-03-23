@@ -9,6 +9,37 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <style>
+        .scroll-button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.scroll-button.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.cart-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 12px;
+}
+    </style>
   </head>
 <body>
     <header>
@@ -34,10 +65,19 @@
         <label for="search-product">Search Products:</label>
         <input id="search-product" type="text" placeholder="Search products..."/>
         <div id="search-result" class="mt-3"></div>
+        <button id="scroll-button" class="scroll-button">
+            Checkout
+            <span id="cart-count" class="cart-count">0</span>
+        </button>
 
+        
         <ul id="product-list"></ul>
 
         </section>
+        <section>
+            
+        
+        
     </main>
     <footer>
         <p>&copy; 2025 Group 4. All Rights Reserved.</p>
@@ -107,11 +147,42 @@
                     });
                 });
 
-                $(document).on("click", ".add-to-cart", function () {
-                    const productId = $(this).data("id");
-                    addToCart(productId);
-                });
+                
             });
+    </script>
+    <script>
+        const scrollButton = document.getElementById("scroll-button");
+    const searchProduct = document.getElementById("search-product");
+    const cartCount = document.getElementById("cart-count");
+    const stickyOffset = searchProduct.offsetTop + searchProduct.offsetHeight;
+
+    function updateCartCount() {
+        let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+        let totalCount = cart.reduce((sum, item) => sum + item.Quantity, 0);
+        cartCount.textContent = totalCount;
+    }
+
+    window.onscroll = function () {
+        if (window.pageYOffset > stickyOffset) {
+            scrollButton.classList.add("sticky");
+        } else {
+            scrollButton.classList.remove("sticky");
+        }
+    };
+
+    scrollButton.addEventListener("click", function () {
+        window.location.href = "shopping_cart.html";
+    });
+
+    $(document).on("click", ".add-to-cart", function () {
+        const productId = $(this).data("id");
+        addToCart(productId);
+        updateCartCount();
+    });
+
+    // Initial cart count update
+    updateCartCount();
+
     </script>
 </body>
 </html>
