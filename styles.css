@@ -1,209 +1,118 @@
-/* Body */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body {
-  font-size: 16px;  /* sets the base font size to 16 pixels */
-  line-height: 1.6;  /* defines the space between lines of text as 1.6 times the font size */
-  color: #041E42;  /* sets the text color to Penn State Navy Blue */
-  background-color: #FFFFFF;  /* sets the background color to white */
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #041E42;
+  background-color: #F8F9FA; /* Softer background for better contrast */
+  margin: 0;
+  padding: 20px;
 }
 
-/* Header specific styles */
-header {
-  background-color: #041E42;  /* sets the background color of the header to Penn State Navy Blue */
-  color: #FFFFFF;  /* sets the text color to white for contrast */
-  padding: 20px 0;  /* adds 20 pixels of padding on the top and bottom */
-  text-align: center;  /* centers the text within the header */
+header, footer {
+  background-color: #041E42;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 20px 0;
 }
 
-/* Footer styles */
-footer {
-  background-color: #041E42;  /* sets the background color of the footer to Penn State Navy Blue */ 
-  color: #FFFFFF;  /* sets the text color to white */
-  text-align: center;  /* centers the text within the footer */
-  padding: 10px 0;  /* adds 10 pixels of padding on the top and bottom */
-  position: relative;  /* keeps the footer positioned relative to its normal place */
-  bottom: 0;  /* aligns the footer at the bottom */
-  width: 100%;  /* ensures the footer spans the entire width of the page */     
-}
-
-/* Navigation links */
 nav {
-  background-color: #041E42;  /* Matches the header/footer for consistency */
-  padding: 10px 0;  /* Adds vertical padding */
+  background-color: #041E42;
+  padding: 10px 0;
 }
 
-/* Unordered Lists in nav */
 nav ul {
-  list-style: none;  /* Removes default bullet points */
-  padding: 0; /* Better spacing and layout */
-  margin: 0;  /* Getting rid of unwanted space */
-  display: flex;  /* Ensures all items are in a single row */
-  justify-content: center;  /* Centers the menu horizontally */
-  align-items: center;  /* Aligns items vertically */
-}
-
-/* List items in unordered list */
-nav ul li {
-  margin: 0 15px;  /* Adds spacing between menu items */
-}
-
-/* Anchor elements inside list items */
-nav ul li a {
-  text-decoration: none;  /* Removes text decorations */
-  color: #FFFFFF;  /* White text for contrast */
-  font-weight: bold;  /* Emphasizes text */
-  padding: 10px 15px; /* 10 pixel padding top and bottom, 15 pixel padding left and right. */
-  transition: background-color 0.3s ease-in-out;  /* Smooth hover effect */
-}
-
-/* User hovering over link elements */
-nav ul li a:hover {
-  background-color: #0056A3;  /* Lighter Penn State Blue on hover */
-  border-radius: 5px; /* Rounded corners */
-}
-
-/* Special styling for the Sign-Up button */
-.signup-btn {
-  background-color: #F04E30;  /* Distinct red color for visibility */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px; /* 10 pixel padding top and bottom, 15 pixel padding left and right. */
-}
-
-/* User hovering over sign up button */
-.signup-btn:hover {
-  background-color: #D43F24;  /* Lighter color */
-}
-
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');  /* Poppins font */
-
-/* Apply font to the entire body */
-body {
-    font-family: 'Poppins', sans-serif;  /* Sets Poppins as the primary font */
-    font-size: 16px;  /* Size of font */
-    line-height: 1.6; /* Height of line */
-    color: #041E42; /* Sets the text color to Penn State Navy Blue */
-    background-color: #FFFFFF;  /* Sets the background color to white */
-}
-
-/* Header, Footer, and Navigation Font Styling */
-header, footer, nav {
-    font-family: 'Poppins', sans-serif;  /* Ensures consistency across sections */
-    font-weight: 600;  /* Makes headers and nav links slightly bolder */
-}
-
-/* Improve readability for paragraph text */
-p {
-    font-family: 'Poppins', sans-serif; /* Font family */
-    font-weight: 400;  /* Regular weight for paragraphs */
-}
-
-form {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;  /* Align everything to the left for a neat look */
   justify-content: center;
-  margin: 40px auto;  /* Add space between the form and the header/footer */
-  width: 300px;
-  padding: 30px;
-  background-color: #f0f0f0;  /* Light gray background */
-  border-radius: 8px;  /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+  gap: 20px;
 }
 
-form label {
-  display: inline-block;
-  width: 120px;  /* Set a fixed width for labels */
-  margin-right: 10px;
-  text-align: left;  /* Align text to the left */
+nav ul li {
+  display: inline;
 }
 
-form input {
-  width: 100%;  /* Ensures the input takes the remaining space */
-  margin-bottom: 15px;
-  padding: 10px;  /* Ensures uniform padding */
-  border-radius: 4px;  /* Rounded corners */
-  border: 1px solid #ccc;  /* Light border */
-  box-sizing: border-box;  /* Ensures padding doesn't affect width */
+nav ul li a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
-form div {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
+nav ul li a:hover {
+  background-color: #0056A3;
 }
 
-/* Style for the Submit button */
-button {
-  background-color: #041E42;  /* Same as navigation bar */
+button, .signup-btn {
+  background-color: #041E42;
   color: #FFFFFF;
   font-weight: bold;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
-  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  width: 150px;  /* Fixed width for consistency */
-  align-self: center;  /* Aligns the button to the center */
+  transition: 0.3s;
 }
 
-/* When user puts their mouse over button */
-button:hover {
-  background-color: #0056A3;  /* Lighter blue on hover */
+button:hover, .signup-btn:hover {
+  background-color: #0056A3;
 }
 
-/* Increase/Decrease button */
-#cart button.increase,
-#cart button.decrease {
-    all: unset;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px 6px;
-    margin: 0 3px;
-    font-size: 12px;
-    font-weight: bold;
-    background-color: #003366;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 28px;
-    height: 28px;
-    line-height: 1;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-#cart button.increase:hover,
-#cart button.decrease:hover {
-    background-color: #0056A3;
-}
-
-.qty-number {
-  min-width: 20px;
-  text-align: center;
-  display: inline-block;
-}
-/* Remove item button */
-#cart button.remove-item {
-  all: unset;
-  display: inline-flex;
+form {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 2px 6px;
-  margin: 0 3px;
+  margin: 40px auto;
+  padding: 30px;
+  width: 320px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+#cart button {
+  padding: 5px 10px;
   font-size: 14px;
-  font-weight: bold;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+#cart button.increase, #cart button.decrease {
+  background-color: #003366;
+  color: white;
+  width: 30px;
+  height: 30px;
+}
+
+#cart button.increase:hover, #cart button.decrease:hover {
+  background-color: #0056A3;
+}
+
+#cart button.remove-item {
   background-color: #F04E30;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 28px;
-  height: 28px;
-  line-height: 1;
-  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
 }
 
 #cart button.remove-item:hover {
@@ -211,18 +120,17 @@ button:hover {
 }
 
 #product-list {
-    list-style-type: none;
-    padding: 5;
+  list-style-type: none;
+  padding: 20px;
 }
 
-/* Style for each product */
 .product-item {
-    padding: 1em 0;
+  padding: 1em 20px;
+  border-bottom: 1px solid #ccc;
 }
 
-/* Softer divider than default <hr> */
 hr {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 1.5em 0;
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 1.5em 20px;
 }
