@@ -124,10 +124,38 @@
         </form>
     </div>
     <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Collect form data
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Convert data to JSON
+            const jsonData = JSON.stringify(data, null, 2);
+            // Send JSON data to the server to append to orders.json
+            
+            
+            // Create a Blob and download the JSON file
+            const blob = new Blob([jsonData], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "orders.json";
+            a.click();
+            URL.revokeObjectURL(url);
+
+            alert("Form data has been saved as a JSON file.");
+            
+        });
+    
     
 
 
-
+/*
         $("#submit").click(function(){
                     if(cart.length === 0){
                         alert("Somehow you made it here with your cart being empty!");
@@ -140,7 +168,7 @@
                     $("#total").text("Total: $0");
                     
                 });
-                
+                */
     </script>
 </body>
 </html>
