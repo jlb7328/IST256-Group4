@@ -13,4 +13,7 @@ Submission 3:
   Submission 3 included a checkout page that utilizes an interactive interface from the previous submission and allows the user to have any selections made be automatically taken to the checkout page. This allows the website to feel smooth and streamlined, while keeping the feel that every other page has. Many hours went into ensuring this functioned properly and any additions to it later needed to be made carefully added to ensure nothing breaks. Afterwords, cleaning up this page so that it was readable from a code standpoint was done, and the temporary checkout page on the nav bar was removed with the addition of a proper checkout button that tracks how many items are kept inside of it.
 
 Submission 4:
+  Subm  ssion 4 included a new checkout page that actually facilitates checkout and shipping as well. Main changes of note include the new checkout.html page, and the new orders.json page. While not exactly perfect, it does as indended and functions as needed. Only notable issue is the download of the orders document rather than the change of an already existing one.
+  
+Submission 5:
   
