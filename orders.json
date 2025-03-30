@@ -1,0 +1,14 @@
+{
+  "full-name": "John Doe",
+  "email": "email@mail.com",
+  "phone": "123456789",
+  "street-address": "Street Name",
+  "city": "city",
+  "state": "PA",
+  "country": "USA",
+  "zip-code": "1234567",
+  "card-number": "1235367242",
+  "expiration-date": "00/99",
+  "security-code": "575",
+  "card-name": "John Doe"
+}
