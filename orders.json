@@ -1,4 +1,5 @@
-{
+[
+  {
   "full-name": "John Doe",
   "email": "email@mail.com",
   "phone": "123456789",
@@ -11,4 +12,20 @@
   "expiration-date": "00/99",
   "security-code": "575",
   "card-name": "John Doe"
-}
+  }
+  ,
+  {
+    "full-name": "Bob Smith",
+    "email": "Bob.Smith@gmail.com",
+    "phone": "123-456-7890",
+    "street-address": "123 Street Street",
+    "city": "Citysburgh",
+    "state": "Cool State",
+    "country": "USA",
+    "zip-code": "12345",
+    "card-number": "1234567890123",
+    "expiration-date": "12/99",
+    "security-code": "123",
+    "card-name": "Bob"
+    }
+]
