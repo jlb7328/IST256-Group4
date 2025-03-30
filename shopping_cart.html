@@ -145,20 +145,20 @@
                     location.reload();
                 });
 
-
+                //Temporary filler code. No longer needed - JLB
                 $("#checkout").click(function(){
                     if(cart.length === 0){
                         alert("Your cart is empty!");
                         return;
                     }
-
+                    window.location.href = "checkout.html";
+                    /*
                     alert("Thank you for your purchase!");
                     sessionStorage.removeItem("cart");
                     $("#cart tbody").empty().append('<tr><td colspan="4">Your order has been placed successfully.</td></tr>');
                     $("#total").text("Total: $0");
+                    */
                 });
-
-
                 });
 
         </script>

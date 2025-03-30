@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        
+        .product-list {
+            max-width: 20%;
+            height: auto;
+            overflow-y: auto;
+            border-left: 10px;
+            box-sizing: border-box;
+        }
+        .product-recomendation {
+            max-width: 20%;
+            height: auto;
+            border-right: 10px;
+        }
+        .checkout-form {
+            width: 60%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            
+            box-sizing: border-box;
+        }
+        .section-title {
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <h1>Checkout</h1>
+        <p>Thank you for shopping with us!</p>
+    </header>
+    <nav aria-label="Main Navigation">
+        <ul>
+            <li><a href="index.html" class="tooltip" data-tooltip="Go to the home page">Home</a></li>
+            <li><a href="products.html" class="tooltip" data-tooltip="Browse our products">Products</a></li>
+            <li><a href="about_us.html" class="tooltip" data-tooltip="Learn more about us">About Us</a></li>
+            <li><a href="contact.html" class="tooltip" data-tooltip="Get in touch with us">Contact</a></li>
+            <li><a href="sign_up.html" class="tooltip signup-btn" data-tooltip="Create an account">Sign Up</a></li>
+        </ul>
+    </nav>
+    
+        <h1>Checkout</h1>
+    <div style="box-sizing: border-box;">
+        <!-- #Tried bringing another way to view items in cart while filling information but it made the page look cluttered as I was unable to get it to the left of the form and it stays on top and pushes form down instead
+    <div class="product-list">
+        <section>
+            <h4>Shopping Cart</h4>
+            <table id="cart">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <p id="total">Total: $0</p>
+            </section>
+    </div> -->
+    <div>
+        <form>
+            <!-- Shipping Information -->
+            <div class="section-title">Address</div>
+            <div class="form-group">
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" name="full-name" required oninvalid="this.setCustomValidity('Name cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required oninvalid="this.setCustomValidity('Email cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required oninvalid="this.setCustomValidity('Phone Number cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="street-address">Street Address</label>
+            <input type="text" id="street-address" name="street-address" required oninvalid="this.setCustomValidity('Street Address cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required oninvalid="this.setCustomValidity('City cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" required oninvalid="this.setCustomValidity('State cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" required oninvalid="this.setCustomValidity('Country cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="zip-code">Zip Code</label>
+            <input type="text" id="zip-code" name="zip-code" required oninvalid="this.setCustomValidity('Zip Code cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+
+            <!-- Payment Information -->
+            <div class="section-title">Payment Information</div>
+            <div class="form-group">
+            <label for="card-number">Credit Card Number</label>
+            <input type="text" id="card-number" name="card-number" required oninvalid="this.setCustomValidity('Credit Card Number cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="expiration-date">Expiration Date</label>
+            <input type="text" id="expiration-date" name="expiration-date" placeholder="MM/YY" required oninvalid="this.setCustomValidity('Expiration Date cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="security-code">Security Code</label>
+            <input type="text" id="security-code" name="security-code" required oninvalid="this.setCustomValidity('Security Code cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="card-name">Name on Card</label>
+            <input type="text" id="card-name" name="card-name" required oninvalid="this.setCustomValidity('Name on card cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+
+            <button type="submit">Submit Order</button>
+        </form>
+        <!-- # Was going to try and add a dumb little recomended tab to the right that has a random product from the products.json file
+    </div>
+    <div class="product-recomendation">
+
+    </div>
+    </div>
+-->
+    <!-- # Was trying to add cart review functionality
+    <script>
+        $(document).ready(function(){
+                let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+
+                $.getJSON('products.json', function(products) {
+
+                    //Debugging
+                    console.log("Products data loaded:", products);
+
+                    //Check that it is an array prior to loading.
+                    if (!Array.isArray(products)) {
+                        console.error("Products.json data is not an array.");
+                        return;
+                    }
+
+
+                    const productMap = {};
+                    products.forEach(product => {
+                        productMap[product.ProductId] = product;
+                    });
+
+                    let total = 0;
+                    $("#cart tbody").empty();
+
+                    if (cart.length === 0) {
+                        $("#cart tbody").append('<tr><td colspan="4">Your cart is empty.</td></tr>');
+                        $("#total").text("Total: $0");
+                        return;
+                    }       
+
+                    cart.forEach(cartItem => {
+                        const product = productMap[cartItem.ProductId];
+
+                        if(product){
+                            const quantity = cartItem.Quantity;
+                            const price = parseFloat(product.ProductPrice);
+                            const itemTotal = (quantity * price).toFixed(2);
+                            total += parseFloat(itemTotal);
+
+                            const formattedPrice = price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                            const formattedTotal = parseFloat(itemTotal).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+                            const row = `<tr>
+                                <td>${product.ProductDescription}</td>
+                                <td>${formattedPrice}</td>
+                                <td>
+                                    <button class="decrease" data-id="${product.ProductId}">-</button>
+                                    <span class="qty-number">${quantity}</span>
+                                    <button class="increase" data-id="${product.ProductId}">+</button>
+                                </td>
+                                <td>${formattedTotal}</td>
+                                <td><button class="remove-item" data-id="${product.ProductId}">x</button></td>
+                            </tr>`;
+
+
+                            $("#cart tbody").append(row);
+                        }
+
+                    });
+
+
+                    $("#total").text(`Total: ${total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`);
+                });
+            });
+    </script>
+-->
+    <script>
+       
+
+        $("#submit").click(function(){
+                    if(cart.length === 0){
+                        alert("Somehow you made it here with your cart being empty!");
+                        return;
+                    }
+                    
+                    alert("Thank you for your purchase!");
+                    sessionStorage.removeItem("cart");
+                    $("#cart tbody").empty().append('<tr><td colspan="4">Your order has been placed successfully.</td></tr>');
+                    $("#total").text("Total: $0");
+                    
+                });
+    </script>
+</body>
+</html>
