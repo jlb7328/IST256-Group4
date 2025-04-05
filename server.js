@@ -1,53 +1,26 @@
-//This file acts as a temp api since the website does not actually exist.
-/*
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const app = express();
+const http = require('http')
+const fs = require('fs')
+const port = 8000
 
-// Middleware to parse JSON bodies
-app.use(express.json());
+const server = http.createServer(function(req, res) {
+res.writeHead(200, { 'Content-Type': 'text/html' })
+fs.readFile('index.html', function(error, data) {
+  if (error) {
+    res.writeHead(404)
+    res.write('Error: File Not Found')
+  } else {
+    res.write(data)
+  }
+  
+  res.end()
+})
 
-// Serve static files from the "public" folder
-app.use(express.static(path.join(__dirname, 'public')));
+})
 
-const fileName = path.join(__dirname, 'data.json');
-
-app.post('/save', (req, res) => {
-  // Read the existing JSON file
-  fs.readFile(fileName, 'utf8', (err, data) => {
-    let jsonArray = [];
-
-    if (!err && data) {
-      try {
-        jsonArray = JSON.parse(data);
-        if (!Array.isArray(jsonArray)) {
-          jsonArray = [jsonArray];
-        }
-      } catch (parseErr) {
-        console.error('Error parsing JSON:', parseErr);
-        jsonArray = [];
-      }
-    }
-
-    // Append new data to the array
-    jsonArray.push(req.body);
-
-    // Write the updated array back to the file
-    fs.writeFile(fileName, JSON.stringify(jsonArray, null, 2), (writeErr) => {
-      if (writeErr) {
-        console.error('Error writing file:', writeErr);
-        return res.status(500).send('Error saving data');
-      }
-      res.send('Data saved successfully!');
-    });
-  });
-});
-
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-*/
-//temp same machine work is just on sign_up.html
+server.listen(port, function(error) {
+  if (error) {
+    console.log('Something went wrong', error)
+  } else {
+    console.log('Server is listening on port ' + port)
+  }
+})
