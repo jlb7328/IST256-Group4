@@ -1,0 +1,17 @@
+
+    [
+        {
+            "card-name": "Joshua Brandt",
+            "card-number": "1234 5678 9012 3456",
+            "city": "State College",
+            "country": "USA",
+            "email": "jlb7328@psu.edu",
+            "expiration-date": "12/25",
+            "full-name": "Joshua Brandt",
+            "phone": "(123) 456-7890",
+            "security-code": "123",
+            "state": "PA",
+            "street-address": "123 Penn Street",
+            "zip-code": "16801"
+        }
+    ]

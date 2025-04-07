@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .check-space {
+            margin-top: 100px;           
+        }
+    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Billing Details</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+<body>
+    <header>
+        <h1>Checkout</h1>
+        <p>Please ensure everything is correct before proceeding</p>
+    </header>
+    <nav aria-label="Main Navigation">
+        <ul>
+            <li><a href="index.html" class="tooltip" data-tooltip="Go to the home page">Home</a></li>
+            <li><a href="products.html" class="tooltip" data-tooltip="Browse our products">Products</a></li>
+            <li><a href="about_us.html" class="tooltip" data-tooltip="Learn more about us">About Us</a></li>
+            <li><a href="contact.html" class="tooltip" data-tooltip="Get in touch with us">Contact</a></li>
+            <li><a href="sign_up.html" class="tooltip signup-btn" data-tooltip="Create an account">Sign Up</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="results"></div>
+        <p>----------------------------------------------------------------------------</p>
+            <p>Enter something wrong? <a href="/checkout.html">Click Here</a></p>
+            
+        <p>----------------------------------------------------------------------------</p>
+        <script>
+            const resultsList = document.getElementById('results')
+            new URLSearchParams(window.location.search).forEach((value, name) => {
+                resultsList.append(name + ': ' + value)
+                resultsList.append(document.createElement('br'))
+            })
+        </script>
+
+    <section>
+        <h3 class="check-space">Shopping Cart</h3>
+        <p>Review the items in your cart below.</p>
+        <table id="cart">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <p id="total">Total: $0</p>
+    </section>
+
+        <script>
+        $(document).ready(function(){
+                let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+
+                $.getJSON('products.json', function(products) {
+
+                    //Debugging
+                    console.log("Products data loaded:", products);
+
+                    //Check that it is an array prior to loading.
+                    if (!Array.isArray(products)) {
+                        console.error("Products.json data is not an array.");
+                        return;
+                    }
+
+
+                    const productMap = {};
+                    products.forEach(product => {
+                        productMap[product.ProductId] = product;
+                    });
+
+                    let total = 0;
+                    $("#cart tbody").empty();
+
+                    if (cart.length === 0) {
+                        $("#cart tbody").append('<tr><td colspan="4">Your cart is empty.</td></tr>');
+                        $("#total").text("Total: $0");
+                        return;
+                    }       
+
+                    cart.forEach(cartItem => {
+                        const product = productMap[cartItem.ProductId];
+
+                        if(product){
+                            const quantity = cartItem.Quantity;
+                            const price = parseFloat(product.ProductPrice);
+                            const itemTotal = (quantity * price).toFixed(2);
+                            total += parseFloat(itemTotal);
+
+                            const formattedPrice = price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                            const formattedTotal = parseFloat(itemTotal).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+                            const row = `<tr>
+                                <td>${product.ProductDescription}</td>
+                                <td>${formattedPrice}</td>
+                                <td>
+                                    
+                                    <span class="qty-number">${quantity}</span>
+                                    
+                                </td>
+                                <td>${formattedTotal}</td>`;
+                            $("#cart tbody").append(row);
+                        }
+                    });
+                    total += 20;
+                    $("#cart tbody").append('<tr><td colspan="4">Shipping Fee: $20.00</td></tr>');
+                    $("#total").text(`Total: ${total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`);
+                });
+                });
+        </script>
+        <button id="checkout" style="margin-bottom: 100px">Pay and Ship</button>
+    </main>
+    <script>
+        $("#checkout").click(function(){
+            sessionStorage.removeItem("finalPurchase");
+        let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+        sessionStorage.setItem("finalPurchase", JSON.stringify(cart));
+        
+            window.location.href = "thx.html";
+            sessionStorage.removeItem("cart");
+        
+        });
+    </script>
+    <footer>
+        <p>&copy; 2025 Group 4. All Rights Reserved.</p>
+    </footer>
+</body>
