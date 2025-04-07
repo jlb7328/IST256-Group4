@@ -1,9 +1,0 @@
-[
-    {
-        "name": "John Doe",
-        "address": "Example Address",
-		"credit-card-number": "9999999999999999",
-		"credit-card-expiration": "99/99",
-		"security-code": "999"	
-    }
-]
