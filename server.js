@@ -3,9 +3,10 @@ const fs = require('fs')
 const express = require('express')  // require the express library to be downloaded.
 const app = express() // creates an app variable by calling the express function.
 const port = 8000 // defines the port as 8000.
-require('dotenv').config(); // load environment variables from .env
+require('dotenv').config(); // load environment variables from .env.
 
 app.use(express.static('public'))
+app.use(express.json());  // middleware to parse incoming JSON data.
 app.set('view engine', 'ejs') // set the view engine to ejs.
 app.get('/', (req, res) => {
   console.log("At Group 4 Website")
