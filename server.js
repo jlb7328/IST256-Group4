@@ -4,11 +4,22 @@ const express = require('express')  // require the express library to be downloa
 const app = express() // creates an app variable by calling the express function.
 const port = 8000 // defines the port as 8000.
 
+app.use(express.static('public'))
 app.set('view engine', 'ejs') // set the view engine to ejs.
 app.get('/', (req, res) => {
   console.log("At Group 4 Website")
   res.render("index") // render index file.
 })
+const billingRouter = require("./routes/billing") // import billing router into server.
+const cartRouter = require("./routes/cart") // import cart router into server.
+const productsRouter = require("./routes/products") // import products router into server.
+const returnsRouter = require("./routes/returns") // import returns router into server.
+const shippingRouter = require("./routes/shipping") // import shipping router into server.
+app.use('/billing', billingRouter)  // use billing router in server.
+app.use('/cart', cartRouter)  // use cart router in server.
+app.use('/products', productsRouter)  // use products router in server.
+app.use('/returns', returnsRouter)  // use returns router in server.
+app.use('/shipping', shippingRouter)  // use shipping router in server.
 app.listen(port)  // make the app actually run.
 
 if (process.env.NODE_ENV !== 'production') {
@@ -18,7 +29,7 @@ const stripeSK = process.env.stripeSK
 const stripePK = process.env.stripePK
 //console.log(stripePK, stripeSK)
 
-app.use(express.static('public'))
+
 
 app.use(express.json()); // Middleware to parse JSON data
 
