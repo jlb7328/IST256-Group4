@@ -10,6 +10,11 @@ app.get('/', (req, res) => {
   console.log("At Group 4 Website")
   res.render("index") // render index file.
 })
+const billingRouter = require("./routes/billing") // import billing router into server.
+const cartRouter = require("./routes/cart") // import cart router into server.
+const productsRouter = require("./routes/products") // import products router into server.
+const returnsRouter = require("./routes/returns") // import returns router into server.
+const shippingRouter = require("./routes/shipping") // import shipping router into server.
 app.listen(port)  // make the app actually run.
 
 if (process.env.NODE_ENV !== 'production') {
