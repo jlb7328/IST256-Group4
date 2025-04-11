@@ -11,7 +11,7 @@ const stripeSK = process.env.stripeSK
 const stripePK = process.env.stripePK
 //console.log(stripePK, stripeSK)
 
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs') // set the view engine to ejs.
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {  // updated GET for testing purposes.
