@@ -15,6 +15,11 @@ const cartRouter = require("./routes/cart") // import cart router into server.
 const productsRouter = require("./routes/products") // import products router into server.
 const returnsRouter = require("./routes/returns") // import returns router into server.
 const shippingRouter = require("./routes/shipping") // import shipping router into server.
+app.use('/billing', billingRouter)  // use billing router in server.
+app.use('/cart', cartRouter)  // use cart router in server.
+app.use('/products', productsRouter)  // use products router in server.
+app.use('/returns', returnsRouter)  // use returns router in server.
+app.use('/shipping', shippingRouter)  // use shipping router in server.
 app.listen(port)  // make the app actually run.
 
 if (process.env.NODE_ENV !== 'production') {
