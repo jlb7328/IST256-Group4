@@ -5,9 +5,9 @@ const app = express() // creates an app variable by calling the express function
 const port = 8000 // defines the port as 8000.
 
 app.set('view engine', 'ejs') // set the view engine to ejs.
-app.get('/', (req, res) => {  // updated GET for testing purposes.
+app.get('/', (req, res) => {
   console.log("At Group 4 Website")
-  res.send("Hello User!")
+  res.render("index") // render index file.
 })
 app.listen(port)  // make the app actually run.
 
