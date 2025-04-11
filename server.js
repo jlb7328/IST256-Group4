@@ -1,8 +1,8 @@
 const http = require('http')
 const fs = require('fs')
-const express = require('express')
-const app = express()
-const port = 8000
+const express = require('express')  // require the express library to be downloaded.
+const app = express() // creates an app variable by calling the express function.
+const port = 8000 // defines the port as 8000.
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -14,9 +14,11 @@ const stripePK = process.env.stripePK
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
-app.get('/')
-
-app.listen(port)
+app.get('/', (req, res) => {  // updated GET for testing purposes.
+  console.log("At Group 4 Website")
+  res.send("Hello User!")
+})
+app.listen(port)  // make the app actually run.
 
 
 
