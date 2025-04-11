@@ -4,6 +4,13 @@ const express = require('express')  // require the express library to be downloa
 const app = express() // creates an app variable by calling the express function.
 const port = 8000 // defines the port as 8000.
 
+app.set('view engine', 'ejs') // set the view engine to ejs.
+app.get('/', (req, res) => {  // updated GET for testing purposes.
+  console.log("At Group 4 Website")
+  res.send("Hello User!")
+})
+app.listen(port)  // make the app actually run.
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -11,16 +18,7 @@ const stripeSK = process.env.stripeSK
 const stripePK = process.env.stripePK
 //console.log(stripePK, stripeSK)
 
-app.set('view engine', 'ejs') // set the view engine to ejs.
 app.use(express.static('public'))
-
-app.get('/', (req, res) => {  // updated GET for testing purposes.
-  console.log("At Group 4 Website")
-  res.send("Hello User!")
-})
-app.listen(port)  // make the app actually run.
-
-
 
 app.use(express.json()); // Middleware to parse JSON data
 
