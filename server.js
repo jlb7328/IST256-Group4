@@ -8,6 +8,9 @@ require('dotenv').config(); // load environment variables from .env.
 app.use(express.static(path.join(__dirname, 'public')));  // middleware to serve static files from /public
 app.use(express.json());  // middleware to parse incoming JSON data.
 app.set('view engine', 'ejs') // set the view engine to ejs.
+/**
+ * TODO - Connect to MongoDB.
+ */
 app.get('/', (req, res) => {
   console.log("At Group 4 Website")
   res.render("index") // render index file.
@@ -60,6 +63,22 @@ app.post('/checkout', async (req, res) => {
         res.status(500).send({ error: 'Failed to save order' });
     }
 });
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);  // notify user of server running.
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //server testing without express. Works fine but we are now using express. Keeping as backup incase express does not work for others.
