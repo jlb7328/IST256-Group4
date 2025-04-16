@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const ProductSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
-  description: String
+const mongoose = require('mongoose'); // require Mongoose from MongoDB.
+const ProductSchema = new mongoose.Schema({ // define new product schema with...
+  name: String, // ...string for name...
+  price: Number,  // ...number for price of product...
+  description: String // ...and string description of product.
 });
-module.exports = mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('Product', ProductSchema);  // defines a new model named Product using schema we created.
