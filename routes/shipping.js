@@ -1,15 +1,23 @@
-const express = require('express'); // import express
-const router = express.Router(); // create router
-const Shipping = require('../models/Shipping'); // import Shipping model
-// POST /api/shipping — save a new shipping form entry
-router.post('/', async (req, res) => {
-  const shippingData = new Shipping(req.body); // create new Shipping object
-  const saved = await shippingData.save(); // save to DB
-  res.json(saved); // return the saved shipping data
-});
-// GET /api/shipping — get all shipping records (optional, useful for admin/testing)
-router.get('/', async (req, res) => {
-  const shipping = await Shipping.find(); // get all entries
-  res.json(shipping); // return entries
-});
-module.exports = router; // export router
+const express = require('express')  // import Express.
+const router = express.Router() // create a router.
+const Shipping = require('../models/Shipping')  // import the Shipping model.
+
+
+router.get('/', async (req, res) => { // GET all shipping entries.
+  try {
+    const records = await Shipping.find() // find all shipping documents.
+    res.json(records) // respond with them.
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch shipping records.' })  // handle error.
+  }
+})
+router.post('/', async (req, res) => {  // POST a new shipping record.
+  try {
+    const shippingData = new Shipping(req.body) // create a new Shipping entry.
+    await shippingData.save() // save to MongoDB.
+    res.status(201).json(shippingData)  // return the new record.
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to save shipping info.' })  // handle save error.
+  }
+})
+module.exports = router // export this router.
