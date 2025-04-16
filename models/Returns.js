@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // require Mongoose from MongoDB.
 
-const ReturnSchema = new mongoose.Schema({
-  orderId: String,
-  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-  reason: String,
-  status: { type: String, default: 'Pending' },
-  createdAt: { type: Date, default: Date.now }
+const ReturnSchema = new mongoose.Schema({  // define new return schema with...
+  orderId: String,  // ...order ID string...
+  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },  // ...product ID...
+  reason: String, // ...reason for return...
+  status: { type: String, default: 'Pending' }, // ...status...
+  createdAt: { type: Date, default: Date.now }  // ...and created at date with default of current date.
 });
 
-module.exports = mongoose.model('Return', ReturnSchema);
+module.exports = mongoose.model('Return', ReturnSchema);  // define a new model called exports using created schema.
