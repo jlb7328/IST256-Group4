@@ -2,6 +2,7 @@ const http = require('http')  // require http.
 const fs = require('fs')  // require fs.
 const express = require('express')  // require the express library to be downloaded.
 const path = require('path')  // require path.
+const mongoose = require('mongoose')  // require Mongoose for MongoDB. 
 const app = express() // creates an app variable by calling the express function.
 const port = 8000 // defines the port as 8000.
 require('dotenv').config(); // load environment variables from .env.
