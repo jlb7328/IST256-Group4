@@ -11,6 +11,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 })  // connect to MongoDB using Mongoose.
 .then(() => console.log("MongoDB connected successfully.")) // display message if MongoDB connection is successful.
+.catch((err) => console.error("MongoDB connection error:", err))  // catch error and display message if MongoDB connection is unsuccessful.
 app.use(express.static(path.join(__dirname, 'public')));  // middleware to serve static files from /public
 app.use(express.json());  // middleware to parse incoming JSON data.
 app.set('view engine', 'ejs') // set the view engine to ejs.
