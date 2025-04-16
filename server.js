@@ -6,12 +6,13 @@ const mongoose = require('mongoose')  // require Mongoose for MongoDB.
 const app = express() // creates an app variable by calling the express function.
 const port = 8000 // defines the port as 8000.
 require('dotenv').config(); // load environment variables from .env.
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})  // connect to MongoDB using Mongoose.
 app.use(express.static(path.join(__dirname, 'public')));  // middleware to serve static files from /public
 app.use(express.json());  // middleware to parse incoming JSON data.
 app.set('view engine', 'ejs') // set the view engine to ejs.
-/**
- * TODO - Connect to MongoDB.
- */
 app.get('/', (req, res) => {
   console.log("At Group 4 Website")
   res.render("index") // render index file.
