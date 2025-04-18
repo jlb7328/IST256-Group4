@@ -1,6 +1,6 @@
 const express = require('express')  // import Express.
 const router = express.Router() // create a router.
-const Return = require('../models/Return')  // import Return model.
+const Return = require('../models/Returns')  // import Return model.
 router.get('/', async (req, res) => { // GET all return records.
   try {
     const records = await Return.find() // get all return entries from database.
