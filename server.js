@@ -27,12 +27,14 @@ const cartRouter = require("./routes/cart") // import cart router into server.
 const productsRouter = require("./routes/products") // import products router into server.
 const returnsRouter = require("./routes/returns") // import returns router into server.
 const shippingRouter = require("./routes/shipping") // import shipping router into server.
+
 const { connectToDatabase } = require('./connect');
 app.use('/billing', billingRouter)  // use billing router in server.
 app.use('/cart', cartRouter)  // use cart router in server.
 app.use('/products', productsRouter)  // use products router in server.
 app.use('/returns', returnsRouter)  // use returns router in server.
 app.use('/shipping', shippingRouter)  // use shipping router in server.
+
 app.listen(port)  // make the app actually run.
 
 if (process.env.NODE_ENV !== 'production') {
@@ -42,22 +44,20 @@ if (process.env.NODE_ENV !== 'production') {
 
 //DatabaseConnect
 
-const uri = "mongodb+srv://TestAdmin:3HMcrJQedXWAgwC6@gate-logistics.3fvmnet.mongodb.net/?retryWrites=true&w=majority&appName=GATE-Logistics&authSource=users";
-const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
-async function run() {
-  try {
-    // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
-    await mongoose.connect(uri, clientOptions);
-    await mongoose.connection.db.admin().command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await mongoose.disconnect();
-  }
-}
-run().catch(console.dir); 
-
-
+const dbPort=27017;
+mongoose.connect("mongodb+srv://TestAdmin:HgwMzuwkJfaHIbMT@gate-logistics.3fvmnet.mongodb.net/?retryWrites=true&w=majority&appName=GATE-Logistics").then(() => {
+    console.log("MongoDB connected successfully.")
+    app.listen(dbPort, () => {
+        console.log(`Server running at http://localhost:${dbPort}`);  // notify user of server running.
+        
+    });
+  }).catch(()=> {
+        console.error
+  });
+//Proves connection proof by adding info into test/timedconnections
+const DateCon = require('./timedConnect')
+const connectDate = new DateCon({ ConnectionEstablished: new Date() })
+connectDate.save().then(() => console.log("Timestamp Uploaded"))
 
 
 
@@ -90,6 +90,7 @@ app.post('/checkout', async (req, res) => {
         res.status(500).send({ error: 'Failed to save order' });
     }
 });
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);  // notify user of server running.
 });
