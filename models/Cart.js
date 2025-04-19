@@ -1,13 +1,13 @@
-const mongoose = require('mongoose'); // require Mongoose from MongoDB.
+const mongoose = require('mongoose');
 
-const CartItemSchema = new mongoose.Schema({  // define new schema with...
-  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },  // ...product ID...
-  quantity: Number  // ...and quantity number.
+const CartItemSchema = new mongoose.Schema({
+  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+  quantity: Number
 });
 
-const CartSchema = new mongoose.Schema({  // define new schema with...
-  items: [CartItemSchema],  // ...items using CartItemSchema...
-  createdAt: { type: Date, default: Date.now }  // ...and created at date with default of current time.
+const CartSchema = new mongoose.Schema({
+  items: [CartItemSchema],
+  createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Cart', CartSchema);  // define new model named Cart with second schema we defined.
+module.exports = mongoose.model('Cart', CartSchema);
