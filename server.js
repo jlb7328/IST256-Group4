@@ -6,12 +6,15 @@ const mongoose = require('mongoose')  // require Mongoose for MongoDB.
 const app = express() // creates an app variable by calling the express function.
 const port = 8000 // defines the port as 8000.
 require('dotenv').config(); // load environment variables from .env.
-mongoose.connect(process.env.MONGO_URI, {
+/*
+mongoose.connect(toString(process.env.MONGO_URI), {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })  // connect to MongoDB using Mongoose.
 .then(() => console.log("MongoDB connected successfully.")) // display message if MongoDB connection is successful.
 .catch((err) => console.error("MongoDB connection error:", err))  // catch error and display message if MongoDB connection is unsuccessful.
+*/
+
 app.use(express.static(path.join(__dirname, 'public')));  // middleware to serve static files from /public
 app.use(express.json());  // middleware to parse incoming JSON data.
 app.set('view engine', 'ejs') // set the view engine to ejs.
@@ -24,6 +27,9 @@ const cartRouter = require("./routes/cart") // import cart router into server.
 const productsRouter = require("./routes/products") // import products router into server.
 const returnsRouter = require("./routes/returns") // import returns router into server.
 const shippingRouter = require("./routes/shipping") // import shipping router into server.
+//const mongoosescript = require('./mongoosescript'); // Import the mongoosescript module
+//const localgoose = require('./localgoose'); // Import the localgoose module
+const { connectToDatabase } = require('./connect');
 app.use('/billing', billingRouter)  // use billing router in server.
 app.use('/cart', cartRouter)  // use cart router in server.
 app.use('/products', productsRouter)  // use products router in server.
@@ -34,9 +40,15 @@ app.listen(port)  // make the app actually run.
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-const stripeSK = process.env.stripeSK
-const stripePK = process.env.stripePK
-//console.log(stripePK, stripeSK)
+
+
+//DatabaseConnect
+
+//Use whichever finally works {cloud based, local, generated} Comment out other
+
+//mongoosescript();
+//localgoose();
+
 
 
 
