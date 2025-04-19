@@ -27,8 +27,6 @@ const cartRouter = require("./routes/cart") // import cart router into server.
 const productsRouter = require("./routes/products") // import products router into server.
 const returnsRouter = require("./routes/returns") // import returns router into server.
 const shippingRouter = require("./routes/shipping") // import shipping router into server.
-//const mongoosescript = require('./mongoosescript'); // Import the mongoosescript module
-//const localgoose = require('./localgoose'); // Import the localgoose module
 const { connectToDatabase } = require('./connect');
 app.use('/billing', billingRouter)  // use billing router in server.
 app.use('/cart', cartRouter)  // use cart router in server.
@@ -44,10 +42,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 //DatabaseConnect
 
-//Use whichever finally works {cloud based, local, generated} Comment out other
 
-//mongoosescript();
-//localgoose();
 
 
 
@@ -79,7 +74,6 @@ app.post('/checkout', async (req, res) => {
         res.status(500).send({ error: 'Failed to save order' });
     }
 });
-
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);  // notify user of server running.
 });
