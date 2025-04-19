@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const TimeSchema = new mongoose.Schema({
-    ConnectEstablished: { type: Date, default: Date.now }
+    ConnectionEstablished: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('TimeStamp', TimeSchema);

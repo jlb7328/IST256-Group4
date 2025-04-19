@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"/>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+        <script src="returns.js"></script>
     </head>
     <style>
         .scroll-button {
@@ -79,7 +80,7 @@
         </section>
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const orderData = JSON.parse(sessionStorage.getItem("orderData"));
+                const orderData = JSON.parse(sessionStorage.getItem("personalizedReciept"));
                 if (orderData) {
                     document.getElementById("full-name").textContent = orderData["full-name"];
                     document.getElementById("email").textContent = orderData["email"];

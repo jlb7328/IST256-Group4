@@ -1,6 +1,6 @@
 const express = require('express')  // import Express to create the router.
 const router = express.Router() // create a new router instance.
-const Product = require('../models/Product')  // import the Product model (from models/Product.js).
+const Product = require('../models/Products')  // import the Product model (from models/Product.js).
 router.get('/', async (req, res) => { // GET all products from the database.
   try {
     const products = await Product.find() // fetch all products.

@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
 const BillingSchema = new mongoose.Schema({
-  fullName: String,
-  cardNumber: String,
-  expirationDate: String,
-  cvv: String,
-  billingAddress: String,
+  card_number: Number,
+  expiration_date: String,
+  security_code: Number,
+  card_name: String,
   createdAt: {
     type: Date,
     default: Date.now

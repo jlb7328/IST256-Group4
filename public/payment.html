@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        
+        .product-list {
+            max-width: 20%;
+            height: auto;
+            overflow-y: auto;
+            border-left: 10px;
+            box-sizing: border-box;
+        }
+        .product-recomendation {
+            max-width: 20%;
+            height: auto;
+            border-right: 10px;
+        }
+        .checkout-form {
+            width: 60%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            
+            box-sizing: border-box;
+        }
+        .section-title {
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+    
+</head>
+<script type="module" src="/payment.js"></script>
+<body>
+    <header>
+        <h1>Checkout</h1>
+        <p>Thank you for shopping with us!</p>
+    </header>
+    <nav aria-label="Main Navigation">
+        <ul>
+            <li><a href="index.html" class="tooltip" data-tooltip="Go to the home page">Home</a></li>
+            <li><a href="products.html" class="tooltip" data-tooltip="Browse our products">Products</a></li>
+            <li><a href="about_us.html" class="tooltip" data-tooltip="Learn more about us">About Us</a></li>
+            <li><a href="contact.html" class="tooltip" data-tooltip="Get in touch with us">Contact</a></li>
+            <li><a href="sign_up.html" class="tooltip signup-btn" data-tooltip="Create an account">Sign Up</a></li>
+        </ul>
+    </nav>
+    
+        <h1>Checkout</h1>
+    <div style="box-sizing: border-box;">
+
+    <div>
+        <form action="billing_details.html" method="GET" class="checkout-form">
+
+            <!-- Payment Information -->
+            <div class="section-title">Payment Information</div>
+            <div class="form-group">
+            <label for="card_number">Credit Card Number</label>
+            <input type="text" id="card_number" name="card_number" required oninvalid="this.setCustomValidity('Credit Card Number cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="expiration_date">Expiration Date</label>
+            <input type="text" id="expiration_date" name="expiration_date" placeholder="MM/YY" required oninvalid="this.setCustomValidity('Expiration Date cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="security_code">Security Code</label>
+            <input type="text" id="security_code" name="security_code" required oninvalid="this.setCustomValidity('Security Code cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+            <div class="form-group">
+            <label for="card_name">Name on Card</label>
+            <input type="text" id="card_name" name="card_name" required oninvalid="this.setCustomValidity('Name on card cannot be left blank')" oninput="this.setCustomValidity('')">
+            </div>
+
+            <button type="submit">Submit Order</button>
+        </form>
+    </div>
+    
+</body>
+
+</html>

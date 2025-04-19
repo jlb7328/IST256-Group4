@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 
 const ShippingSchema = new mongoose.Schema({
   fullName: String,
-  address: String,
+  email: String,
+  phone: String,
+  street_address: String,
   city: String,
   state: String,
-  zip: String,
   country: String,
-  phone: String,
-  email: String,
+  zip_code: String,
   createdAt: { type: Date, default: Date.now }
 });
 

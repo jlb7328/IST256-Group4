@@ -31,15 +31,45 @@
     <main>
         <div id="results"></div>
         <p>----------------------------------------------------------------------------</p>
-            <p>Enter something wrong? <a href="/checkout.html">Click Here</a></p>
+            <p>Enter something wrong? <a href="#" id="delete-and-redirect">Click Here</a></p>
             
         <p>----------------------------------------------------------------------------</p>
         <script>
-            const resultsList = document.getElementById('results')
-            new URLSearchParams(window.location.search).forEach((value, name) => {
-                resultsList.append(name + ': ' + value)
-                resultsList.append(document.createElement('br'))
-            })
+        document.addEventListener('DOMContentLoaded', function () {
+            const orderData = JSON.parse(sessionStorage.getItem("orderData")) || {};
+            const billingData = JSON.parse(sessionStorage.getItem("billingData")) || {};
+
+            // Merge orderData and billingData into personalizedReceipt
+            const personalizedReceipt = { ...orderData, ...billingData };
+            sessionStorage.setItem("personalizedReceipt", JSON.stringify(personalizedReceipt));
+
+            const resultsDiv = document.getElementById('results');
+
+            if (Object.keys(personalizedReceipt).length === 0) {
+                resultsDiv.innerHTML = '<p>No order or billing data found.</p>';
+            } else {
+                let output = '<h3>Personalized Receipt</h3>';
+                output += '<ul>';
+                for (const [key, value] of Object.entries(personalizedReceipt)) {
+                    output += `<li><strong>${key}:</strong> ${value}</li>`;
+                }
+                output += '</ul>';
+
+                resultsDiv.innerHTML = output;
+            }
+        });
+        </script>
+        <script>
+            document.getElementById('delete-and-redirect').addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default link behavior
+                fetch('/delete-last-entry')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.message);
+                        window.location.href = "/checkout.html"; // Redirect after deletion
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
         </script>
 
     <section>
@@ -126,15 +156,17 @@
     <script>
         $("#checkout").click(function(){
             sessionStorage.removeItem("finalPurchase");
-        let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-        sessionStorage.setItem("finalPurchase", JSON.stringify(cart));
+            sessionStorage.removeItem("billingData");
+            sessionStorage.removeItem("orderData");
+            let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+            sessionStorage.setItem("finalPurchase", JSON.stringify(cart));
         
             window.location.href = "thx.html";
             sessionStorage.removeItem("cart");
-        
         });
     </script>
     <footer>
         <p>&copy; 2025 Group 4. All Rights Reserved.</p>
     </footer>
 </body>
+</html>
