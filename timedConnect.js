@@ -4,4 +4,4 @@ const TimeSchema = new mongoose.Schema({
     ConnectEstablished: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('TimedConnect', TimeSchema);
+module.exports = mongoose.model('TimeStamp', TimeSchema);

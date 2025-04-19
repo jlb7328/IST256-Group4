@@ -45,16 +45,11 @@ if (process.env.NODE_ENV !== 'production') {
 //DatabaseConnect
 
 const dbPort=27017;
-mongoose.connect("mongodb+srv://TestAdmin:HgwMzuwkJfaHIbMT@gate-logistics.3fvmnet.mongodb.net/?retryWrites=true&w=majority&appName=GATE-Logistics").then(() => {
-    console.log("MongoDB connected successfully.")
-    app.listen(dbPort, () => {
-        console.log(`Server running at http://localhost:${dbPort}`);  // notify user of server running.
-        
-    });
-  }).catch(()=> {
-        console.error
-  });
+mongoose.connect("mongodb+srv://TestAdmin:HgwMzuwkJfaHIbMT@gate-logistics.3fvmnet.mongodb.net/IST256?retryWrites=true&w=majority&appName=GATE-Logistics").then(() => {
+    console.log("MongoDB connected successfully.")})
+    
 //Proves connection proof by adding info into test/timedconnections
+
 const DateCon = require('./timedConnect')
 const connectDate = new DateCon({ ConnectionEstablished: new Date() })
 connectDate.save().then(() => console.log("Timestamp Uploaded"))
