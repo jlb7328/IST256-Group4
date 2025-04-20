@@ -88,7 +88,6 @@
         <tbody>
         </tbody>
     </table>
-    <p id="total">Total: $0</p>
     </section>
 
         <script>
@@ -117,7 +116,12 @@
 
                     if (cart.length === 0) {
                         $("#cart tbody").append('<tr><td colspan="4">Your cart is empty.</td></tr>');
-                        $("#total").text("Total: $0");
+                        $("#subtotal, #shipping-cost, #total").remove(); // Remove any existing totals
+                        $("#cart").after(`
+                            <p id="subtotal">Subtotal: $0</p>
+                            <p id="shipping-cost">Shipping: $0</p>
+                            <p id="total">Total: $0</p>
+                        `);
                         return;
                     }       
 
@@ -145,28 +149,23 @@
                             $("#cart tbody").append(row);
                         }
                     });
-                    total += 20;
-                    $("#cart tbody").append('<tr><td colspan="4">Shipping Fee: $20.00</td></tr>');
-                    $("#total").text(`Total: ${total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`);
+
+                    // Calculate shipping cost as 10% of the subtotal
+                    const shippingCost = Math.ceil(total * 0.1);
+                    const grandTotal = total + shippingCost;
+
+                    // Remove any existing totals and append updated totals
+                    $("#subtotal, #shipping-cost, #total").remove();
+                    $("#cart").after(`
+                        <p id="subtotal">Subtotal: ${total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                        <p id="shipping-cost">Shipping: ${shippingCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                        <p id="total">Total: ${grandTotal.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                    `);
                 });
                 });
         </script>
         <button id="checkout" style="margin-bottom: 100px">Pay and Ship</button>
     </main>
-    <script>
-        $("#checkout").click(function(){
-            sessionStorage.removeItem("finalPurchase");
-            sessionStorage.removeItem("billingData");
-            sessionStorage.removeItem("orderData");
-            let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-            sessionStorage.setItem("finalPurchase", JSON.stringify(cart));
-        
-            window.location.href = "thx.html";
-            sessionStorage.removeItem("cart");
-        });
-    </script>
-    <footer>
-        <p>&copy; 2025 Group 4. All Rights Reserved.</p>
-    </footer>
+    <script src="billing_details.js"></script>
 </body>
 </html>

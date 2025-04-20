@@ -1,30 +1,24 @@
 console.log("Script loaded");
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector("form").addEventListener("submit", async function(event) {
-        // Collect form data
-        const formData = new FormData(event.target);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
+    document.getElementById("shipping-form").addEventListener("submit", async function(event) {
+        event.preventDefault();
 
         try {
             // Send payment data to the server
-            const response = await fetch('/checkout', {
+            const response = await fetch('/return', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
             });
-
             if (response.ok) {
-                console.log("Shipping data sent successfully");
-                alert("Ship data submitted successfully!");
+                console.log("Return data sent successfully");
+                alert("Return data submitted successfully!");
             } else {
-                console.error("Failed to send Ship data");
-                alert("Failed to submit Ship data. Please try again.");
+                console.error("Failed to send Return data");
+                alert("Failed to submit Return data. Please try again.");
             }
         } catch (error) {
             console.error("Error:", error);

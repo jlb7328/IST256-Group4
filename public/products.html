@@ -181,5 +181,13 @@
     updateCartCount();
 
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (sessionStorage.getItem("showReturnAlert") === "true") {
+            alert("Sorry you were not satisfied with your purchase, please reconsider shopping with us again.");
+            sessionStorage.removeItem("showReturnAlert"); // Remove the flag after showing the alert
+        }
+    });
+    </script>
 </body>
 </html>

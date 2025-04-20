@@ -75,52 +75,44 @@
                 <p><strong>Security Code:</strong> <span id="security-code"></span></p>
             </div>
             <div>
-                <p>If something here needs changed, please <a href="checkout.html">Go Here</a></p>
+                <p>If something here needs changed, please <a href="#" id="delete-and-redirect">Go Here</a></p>
             </div>
         </section>
         <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const orderData = JSON.parse(sessionStorage.getItem("personalizedReciept"));
-                if (orderData) {
-                    document.getElementById("full-name").textContent = orderData["full-name"];
-                    document.getElementById("email").textContent = orderData["email"];
-                    document.getElementById("phone").textContent = orderData["phone"];
-                    document.getElementById("street-address").textContent = orderData["street-address"];
-                    document.getElementById("city").textContent = orderData["city"];
-                    document.getElementById("state").textContent = orderData["state"];
-                    document.getElementById("zip-code").textContent = orderData["zip-code"];
-                    document.getElementById("country").textContent = orderData["country"];
-                    document.getElementById("card-name").textContent = orderData["card-name"];
-                    document.getElementById("card-number").textContent = orderData["card-number"];
-                    document.getElementById("expiration-date").textContent = orderData["expiration-date"];
-                    document.getElementById("security-code").textContent = orderData["security-code"];
-                } else {
-                    document.getElementById("order-details").innerHTML = "<p>No order data found.</p>";
-                }
-            });
-        </script>
-        <section>
-            <h2>Return Reason</h2>
-            <form id="return-form">
-                <label for="return-reason">Why are you returning this product?</label>
-                <textarea id="return-reason" name="return-reason" rows="4" cols="50" placeholder="Enter your reason here..." required></textarea>
-                <br>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-        <script>
-            document.getElementById("return-form").addEventListener("submit", function(event) {
+            // Display orderData and billingData from sessionStorage
+            const orderData = JSON.parse(sessionStorage.getItem('orderData'));
+            const billingData = JSON.parse(sessionStorage.getItem('billingData'));
+
+            if (orderData) {
+                document.getElementById('full-name').textContent = orderData.fullName || 'N/A';
+                document.getElementById('email').textContent = orderData.email || 'N/A';
+                document.getElementById('phone').textContent = orderData.phone || 'N/A';
+                document.getElementById('street-address').textContent = orderData.streetAddress || 'N/A';
+                document.getElementById('city').textContent = orderData.city || 'N/A';
+                document.getElementById('state').textContent = orderData.state || 'N/A';
+                document.getElementById('zip-code').textContent = orderData.zipCode || 'N/A';
+                document.getElementById('country').textContent = orderData.country || 'N/A';
+            }
+
+            if (billingData) {
+                document.getElementById('card-name').textContent = billingData.cardName || 'N/A';
+                document.getElementById('card-number').textContent = billingData.cardNumber || 'N/A';
+                document.getElementById('expiration-date').textContent = billingData.expirationDate || 'N/A';
+                document.getElementById('security-code').textContent = billingData.securityCode || 'N/A';
+            }
+
+            document.getElementById('delete-and-redirect').addEventListener('click', function (event) {
                 event.preventDefault();
-                const returnReason = document.getElementById("return-reason").value.trim();
-                if (returnReason) {
-                    sessionStorage.setItem("returnReason", returnReason);
-                    alert("Your return reason has been saved.");
-                    document.getElementById("return-form").reset();
-                } else {
-                    alert("Please provide a reason for the return.");
-                }
+                fetch('/delete-last-entry')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.message);
+                        window.location.href = "/checkout.html";
+                    })
+                    .catch(error => console.error('Error:', error));
             });
         </script>
+
         <section>
             <h2>Your Purchase:</h2>
 
@@ -133,144 +125,221 @@
     
             
             <ul id="product-list"></ul>
-    
-            </section>
-            <section>
+            <table id="cart">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
 
-                <p>Review the items</p>
-                <table id="cart">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <p id="total">Total: $0</p>
-                <button id="checkout">Return</button>
-                </section>
-    </main>
-    <script>
-        $(document).ready(function(){
-            let cart = JSON.parse(sessionStorage.getItem("finalPurchase")) || [];
+        <section>
+            <h2>Return Reason</h2>
+            <form id="return-form">
+                <label for="return-reason">Why are you returning this product?</label>
+                <textarea id="return-reason" name="return-reason" rows="4" cols="50" placeholder="Enter your reason here..." required></textarea>
+                <br>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit">Submit</button>
+                    <button type="button" id="refund-order">Refund Order</button>
+                </div>
+            </form>
+        </section>
+        <script>
+            document.getElementById("return-form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                const returnReasonElement = document.getElementById("return-reason");
+                const returnReason = returnReasonElement ? returnReasonElement.value.trim() : "";
 
-            $.getJSON('products.json', function(products) {
-
-                //Debugging
-                console.log("Products data loaded:", products);
-
-                //Check that it is an array prior to loading.
-                if (!Array.isArray(products)) {
-                    console.error("Products.json data is not an array.");
+                if (!returnReason) {
+                    alert("Please provide a reason for the return.");
                     return;
                 }
 
+                const orderData = JSON.parse(sessionStorage.getItem("orderData"));
+                console.log("orderData:", orderData);
 
-                const productMap = {};
+                if (orderData && orderData.fullName && orderData.email && orderData.phone) {
+                    const tempR = {
+                        fullName: orderData.fullName || 'N/A',
+                        email: orderData.email || 'N/A',
+                        phone: orderData.phone || 'N/A',
+                        returnReason: returnReason
+                    };
+
+                    sessionStorage.setItem("tempReturn", JSON.stringify(tempR));
+                    alert("Your return reason and details have been saved.");
+                    window.location.href = "thx.html";
+                } else {
+                    alert("Might need to go through the website the proper way.");
+                }
+            });
+
+            document.getElementById("refund-order").addEventListener("click", function(event) {
+                event.preventDefault();
+                const returnReasonElement = document.getElementById("return-reason");
+                const returnReason = returnReasonElement ? returnReasonElement.value.trim() : "";
+
+                if (!returnReason) {
+                    alert("Please provide a reason for the return.");
+                    return;
+                }
+
+                const orderData = JSON.parse(sessionStorage.getItem("orderData"));
+                if (orderData && orderData.fullName && orderData.email && orderData.phone) {
+                    const tempR = {
+                        fullName: orderData.fullName || 'N/A',
+                        email: orderData.email || 'N/A',
+                        phone: orderData.phone || 'N/A',
+                        returnReason: returnReason
+                    };
+
+                    sessionStorage.setItem("tempReturn", JSON.stringify(tempR));
+                    alert("Your return reason and details have been saved.");
+
+                    fetch('/delete-last-entry')
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data.message);
+                            alert("Order has been refunded.");
+                            window.location.href = "products.html";
+                        })
+                        .catch(error => console.error('Error:', error));
+                } else {
+                    alert("Might need to go through the website the proper way.");
+                }
+            });
+
+            $(document).ready(function () {
+                loadProducts().then(() => {
+                    renderCart();
+                });
+            });
+        </script>
+    </main>
+    <script>
+        let productMap = {}; // Global product map
+
+        // Load products.json and populate productMap
+        function loadProducts() {
+            return $.getJSON('products.json', function (products) {
                 products.forEach(product => {
                     productMap[product.ProductId] = product;
                 });
-
-                let total = 0;
-                $("#cart tbody").empty();
-
-                if (cart.length === 0) {
-                    $("#cart tbody").append('<tr><td colspan="4">Your cart is empty.</td></tr>');
-                    $("#total").text("Total: $0");
-                    return;
-                }       
-
-                cart.forEach(cartItem => {
-                    const product = productMap[cartItem.ProductId];
-
-                    if(product){
-                        const quantity = cartItem.Quantity;
-                        const price = parseFloat(product.ProductPrice);
-                        const itemTotal = (quantity * price).toFixed(2);
-                        total += parseFloat(itemTotal);
-
-                        const formattedPrice = price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-                        const formattedTotal = parseFloat(itemTotal).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-
-                        const row = `<tr>
-                            <td>${product.ProductDescription}</td>
-                            <td>${formattedPrice}</td>
-                            <td>
-                                <button class="decrease" data-id="${product.ProductId}">-</button>
-                                <span class="qty-number">${quantity}</span>
-                                <button class="increase" data-id="${product.ProductId}">+</button>
-                            </td>
-                            <td>${formattedTotal}</td>
-                            <td><button class="remove-item" data-id="${product.ProductId}">x</button></td>
-                        </tr>`;
-
-
-                        $("#cart tbody").append(row);
-                    }
-
-                });
-
-
-                $("#total").text(`Total: ${total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`);
+            }).fail(function () {
+                console.error("Failed to load products.json");
             });
+        }
 
-                function updateQuantity(productId, change) {
-                let cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+        function updateQuantity(productId, change) {
+            let cart = JSON.parse(sessionStorage.getItem("finalPurchase")) || [];
+            const index = cart.findIndex(item => item.ProductId === productId);
 
-                const index = cart.findIndex(item => item.ProductId === productId);
-                if(index > -1){
-                    cart[index].Quantity += change;
-                    
-                    //Removes the item if the quantity is 0(or less)
-                    if(cart[index].Quantity <= 0){
-                        cart.splice(index, 1);
-                    }
+            if (index > -1) {
+                cart[index].Quantity += change;
 
-                    sessionStorage.setItem("cart", JSON.stringify(cart));
-                    location.reload();//Reloads to show the updated cart
+                // Remove the item if the quantity is 0 (or less)
+                if (cart[index].Quantity <= 0) {
+                    cart.splice(index, 1);
                 }
+
+                sessionStorage.setItem("finalPurchase", JSON.stringify(cart));
+                renderCart(); // Update the cart dynamically without refreshing
             }
-        
-            $(document).on("click", ".increase", function () {
-                const productId = $(this).data("id");
-                updateQuantity(productId, 1);
-            });
+        }
 
-            $(document).on("click", ".decrease", function () {
-                const productId = $(this).data("id");
-                updateQuantity(productId, -1);
-            });
+        function renderCart() {
+            let cart = JSON.parse(sessionStorage.getItem("finalPurchase")) || [];
+            let total = 0;
 
-            $(document).on("click", ".remove-item", function () {
-                const productId = $(this).data("id");
-                let finalPurchase = JSON.parse(sessionStorage.getItem("finalPurchase")) || [];
-                finalPurchase = finalPurchase.filter(item => item.ProductId !== productId);
+            $("#cart tbody").empty();
 
-                sessionStorage.setItem("cart", JSON.stringify(finalPurchase));
-                location.reload();
-            });
+            if (cart.length === 0) {
+                $("#cart tbody").append('<tr><td colspan="4">Your cart is empty.</td></tr>');
+                $("#subtotal, #shipping-cost, #total").remove(); // Remove any existing totals
+                $("#cart").after(`
+                    <p id="subtotal">Subtotal: $0</p>
+                    <p id="shipping-cost">Shipping: $0</p>
+                    <p id="total">Total: $0</p>
+                `);
+                return;
+            }
 
-            //Temporary filler code. No longer needed - JLB
-            $("#checkout").click(function(){
-                if(cart.length === 0){
-                    alert("Your cart is empty!");
-                    return;
+            cart.forEach(cartItem => {
+                const product = productMap[cartItem.ProductId];
+
+                if (product) {
+                    const quantity = cartItem.Quantity;
+                    const price = parseFloat(product.ProductPrice);
+                    const itemTotal = (quantity * price).toFixed(2);
+                    total += parseFloat(itemTotal);
+
+                    const formattedPrice = price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                    const formattedTotal = parseFloat(itemTotal).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+                    const row = `<tr>
+                        <td>${product.ProductDescription}</td>
+                        <td>${formattedPrice}</td>
+                        <td>
+                            <button class="decrease" data-id="${product.ProductId}">-</button>
+                            <span class="qty-number">${quantity}</span>
+                            <button class="increase" data-id="${product.ProductId}">+</button>
+                        </td>
+                        <td>${formattedTotal}</td>
+                        <td><button class="remove-item" data-id="${product.ProductId}">x</button></td>
+                    </tr>`;
+
+                    $("#cart tbody").append(row);
                 }
-                window.location.href = "thx.html";
-                /*
-                alert("Thank you for your purchase!");
-                sessionStorage.removeItem("cart");
-                $("#cart tbody").empty().append('<tr><td colspan="4">Your order has been placed successfully.</td></tr>');
-                $("#total").text("Total: $0");
-                */
-            });
             });
 
+            // Calculate shipping cost as 10% of the subtotal
+            const shippingCost = Math.ceil(total * 0.1);
+            const grandTotal = total + shippingCost;
+
+            // Remove any existing totals and append updated totals
+            $("#subtotal, #shipping-cost, #total").remove();
+            $("#cart").after(`
+                <p id="subtotal">Subtotal: ${total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                <p id="shipping-cost">Shipping: ${shippingCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                <p id="total">Total: ${grandTotal.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+            `);
+        }
+
+        $(document).on("click", ".increase", function (event) {
+            event.preventDefault();
+            const productId = $(this).data("id");
+            updateQuantity(productId, 1);
+        });
+
+        $(document).on("click", ".decrease", function (event) {
+            event.preventDefault();
+            const productId = $(this).data("id");
+            updateQuantity(productId, -1);
+        });
+
+        $(document).on("click", ".remove-item", function (event) {
+            event.preventDefault();
+            const productId = $(this).data("id");
+            let cart = JSON.parse(sessionStorage.getItem("finalPurchase")) || [];
+            cart = cart.filter(item => item.ProductId !== productId);
+
+            sessionStorage.setItem("finalPurchase", JSON.stringify(cart));
+            renderCart(); // Update the cart dynamically without refreshing
+        });
+
+        $(document).ready(function () {
+            loadProducts().then(() => {
+                renderCart(); // Initial render of the cart after products are loaded
+            });
+        });
     </script>
 </body>
 </html>

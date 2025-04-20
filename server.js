@@ -56,6 +56,7 @@ connectDate.save().then(() => console.log("Timestamp Uploaded"))
 
 const paydata = require('./models/Billing');
 const shipdata = require('./models/Shipping');
+const ordersData = require('./models/Orders');
 
 async function messyClean() {
   try {
@@ -100,6 +101,30 @@ app.post('/payment', async (req, res) => {
     } catch (error) {
         console.error('Error saving payment data:', error);
         res.status(500).send({ error: 'Failed to save payment data' });
+    }
+});
+
+app.post('/orders', async (req, res) => {
+    try {
+        console.log("Received order data:", req.body);
+
+        const orderData = req.body;
+
+        // Validate the incoming orderData structure
+        if (!orderData.customerInfo || !orderData.orderInfo || !orderData.paymentInfo) {
+            console.error("Invalid order data structure:", orderData);
+            return res.status(400).send({ error: 'Invalid order data structure' });
+        }
+
+        console.log("Received paymentInfo:", orderData.paymentInfo);
+
+        const orderDetails = new ordersData(orderData);
+        await orderDetails.save();
+        res.status(201).send({ message: 'Order data saved successfully!' });
+        console.log("Order data saved successfully!");
+    } catch (error) {
+        console.error('Error saving order data:', error);
+        res.status(500).send({ error: 'Failed to save order data' });
     }
 });
 

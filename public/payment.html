@@ -66,7 +66,7 @@
     <div style="box-sizing: border-box;">
 
     <div>
-        <form action="billing_details.html" method="GET" class="checkout-form">
+        <form action="billing_details.html" class="checkout-form">
 
             <!-- Payment Information -->
             <div class="section-title">Payment Information</div>
@@ -92,5 +92,21 @@
     </div>
     
 </body>
+<script>
+    document.querySelector('.checkout-form').addEventListener('submit', function(event) {
+        event.preventDefault();
 
+        const billingData = {
+            cardNumber: document.getElementById('card_number').value,
+            expirationDate: document.getElementById('expiration_date').value,
+            securityCode: document.getElementById('security_code').value,
+            cardName: document.getElementById('card_name').value
+        };
+
+        sessionStorage.setItem('billingData', JSON.stringify(billingData));
+
+
+        window.location.href = 'billing_details.html';
+    });
+</script>
 </html>
