@@ -44,8 +44,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 //DatabaseConnect
 
-const dbPort=27017;//TODO: Readd IST256 behind / when done testing.
-mongoose.connect("mongodb+srv://TestAdmin:HgwMzuwkJfaHIbMT@gate-logistics.3fvmnet.mongodb.net/?retryWrites=true&w=majority&appName=GATE-Logistics").then(() => {
+const dbPort=27017;
+mongoose.connect("mongodb+srv://TestAdmin:HgwMzuwkJfaHIbMT@gate-logistics.3fvmnet.mongodb.net/IST256?retryWrites=true&w=majority&appName=GATE-Logistics").then(() => {
     console.log("MongoDB connected successfully.")})
     
 //Proves connection proof by adding info into test/timedconnections
@@ -57,6 +57,9 @@ connectDate.save().then(() => console.log("Timestamp Uploaded"))
 const paydata = require('./models/Billing');
 const shipdata = require('./models/Shipping');
 const ordersData = require('./models/Orders');
+const Account = require('./models/Accounts');
+const Cart = require('./models/Cart'); // Import the Cart model
+const Return = require('./models/Returns'); // Import the Returns model
 
 async function messyClean() {
   try {
@@ -128,6 +131,26 @@ app.post('/orders', async (req, res) => {
     }
 });
 
+app.post('/signup', async (req, res) => {
+  try {
+    const { name, email, password, age, phone, address } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !password || !age || !phone || !address) {
+      return res.status(400).send({ error: 'All fields are required.' });
+    }
+
+    // Create a new account document
+    const newAccount = new Account({ name, email, password, age, phone, address });
+    await newAccount.save();
+
+    res.status(201).send({ message: 'Account created successfully!' });
+  } catch (error) {
+    console.error('Error creating account:', error);
+    res.status(500).send({ error: 'Failed to create account.' });
+  }
+});
+
 app.get('/delete-last-entry', async (req, res) => {
   
   try {
@@ -156,6 +179,81 @@ app.get('/delete-last-entry', async (req, res) => {
     console.error('Error deleting last entry:', error.message, '\n \n FALSE POSITIVE \n \n No Actual Errors. Carry On.\n \n');
     res.status(500).send({ error: 'Failed to delete last entry', details: error.message });
   }
+});
+
+app.get('/get-latest-account', async (req, res) => {
+  console.log("Fetching latest account ID...");
+  try {
+    const latestAccount = await Account.findOne().sort({ _id: -1 }); // Get the most recent account
+    if (latestAccount) {
+      res.status(200).send({ _id: latestAccount._id });
+      console.log('Latest account ID:', latestAccount._id); // Log the ID of the latest account
+    } else {
+      res.status(404).send({ error: 'No accounts found.' });
+    }
+  } catch (error) {
+    console.error('Error fetching latest account:', error);
+    res.status(500).send({ error: 'Failed to fetch latest account.' });
+  }
+});
+
+app.get('/get-cart', async (req, res) => {
+    const { accountId } = req.query;
+    if (!accountId) {
+        return res.status(400).send({ error: 'Account ID is required.' });
+    }
+
+    try {
+        const cart = await Cart.where("accId").equals(accountId);
+        if (cart) {
+            res.status(200).send(cart);
+        } else {
+            res.status(404).send({ error: 'No cart found for this account ID.' });
+        }
+    } catch (error) {
+        console.error('Error fetching cart:', error);
+        res.status(500).send({ error: 'Failed to fetch cart.' });
+    }
+});
+
+app.post('/save-cart', async (req, res) => {
+    const { accId, items } = req.body;
+
+    if (!accId || !items) {
+        return res.status(400).send({ error: 'Account ID and cart items are required.' });
+    }
+
+    try {
+        const existingCart = await Cart.findOne({ userID: accId });
+        if (existingCart) {
+            // Update the existing cart
+            existingCart.items = items;
+            existingCart.savedAt = new Date();
+            await existingCart.save().then(() => console.log("Cart updated successfully!"));
+            res.status(200).send({ message: 'Cart updated successfully.' });
+        } else {
+            // Create a new cart
+            const newCart = new Cart({ userID: accId, items });
+            await newCart.save().then(() => console.log("Cart created successfully!"));
+            res.status(201).send({ message: 'Cart saved successfully.' });
+        }
+    } catch (error) {
+        console.error('Error saving cart:', error);
+        res.status(500).send({ error: 'Failed to save cart.' });
+    }
+});
+
+app.post('/api/returns', async (req, res) => {
+    try {
+        console.log("Received return data:", req.body);
+        const returnData = new Return(req.body); // Create a new document using the Returns model
+        await returnData.save(); // Save the document to the "returns" collection
+        res.status(201).send({ message: 'Return data saved successfully!' });
+        console.log("Return data saved successfully!");
+    } catch (error) {
+        console.error('Error saving return data:', error);
+        res.status(500).send({ error: 'Failed to save return data' });
+    }
 });
 
 app.listen(port, () => {
