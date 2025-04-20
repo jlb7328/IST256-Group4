@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 const ReturnSchema = new mongoose.Schema({
-  orderId: String,
-  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-  reason: String,
+  fullName: String,
+  email: String,
+  refund: Boolean,
+  returnReason: String,
   status: { type: String, default: 'Pending' },
   createdAt: { type: Date, default: Date.now }
 });

@@ -40,6 +40,7 @@
         </table>
         <p id="total">Total: $0</p>
         <button id="checkout">Checkout</button>
+        <button id="clear-cart">Clear Cart</button>
         </section>
     </main>
     <footer>
@@ -144,21 +145,22 @@
                     location.reload();
                 });
 
-                //Temporary filler code. No longer needed - JLB
                 $("#checkout").click(function(){
                     if(cart.length === 0){
                         alert("Your cart is empty!");
                         return;
                     }
                     window.location.href = "checkout.html";
-                    /*
-                    alert("Thank you for your purchase!");
+                });
+
+                $("#clear-cart").click(function(){
                     sessionStorage.removeItem("cart");
-                    $("#cart tbody").empty().append('<tr><td colspan="4">Your order has been placed successfully.</td></tr>');
-                    $("#total").text("Total: $0");
-                    */
+                    sessionStorage.removeItem("cartDownload");
+                    alert("Cart has been cleared.");
+                    location.reload(); // Reload to reflect the cleared cart
                 });
-                });
+            });
 
         </script>
     </body>
+</html>

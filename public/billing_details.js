@@ -9,15 +9,12 @@ document.getElementById("checkout").addEventListener("click", function () {
     }
 
 
+    sessionStorage.setItem("finalPurchase", JSON.stringify(cart));
+
     const orderInfo = cart.map(item => ({
         ProductId: item.ProductId,
         Quantity: item.Quantity
     }));
-
-
-
-
-
 
     const orderData = {
         customerInfo: personalizedReceipt,
@@ -34,7 +31,6 @@ document.getElementById("checkout").addEventListener("click", function () {
 
     console.log("Order Data to be sent:", orderData); // Debugging
 
-
     fetch('/orders', {
         method: 'POST',
         headers: {
@@ -45,9 +41,7 @@ document.getElementById("checkout").addEventListener("click", function () {
     .then(response => {
         if (response.ok) {
             console.log("Order data sent successfully!");
-            sessionStorage.removeItem("orderData");
             sessionStorage.removeItem("cart");
-            sessionStorage.removeItem("billingData");
             window.location.href = "thx.html";
         } else {
             console.error("Failed to send order data.");

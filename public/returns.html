@@ -171,10 +171,28 @@
                         fullName: orderData.fullName || 'N/A',
                         email: orderData.email || 'N/A',
                         phone: orderData.phone || 'N/A',
-                        returnReason: returnReason
+                        returnReason: returnReason,
+                        refund: false
                     };
 
                     sessionStorage.setItem("tempReturn", JSON.stringify(tempR));
+
+                    // Send tempReturn to MongoDB
+                    fetch('/api/returns', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(tempR),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Return saved to database:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error saving return to database:', error);
+                    });
+
                     alert("Your return reason and details have been saved.");
                     window.location.href = "thx.html";
                 } else {
@@ -198,10 +216,28 @@
                         fullName: orderData.fullName || 'N/A',
                         email: orderData.email || 'N/A',
                         phone: orderData.phone || 'N/A',
-                        returnReason: returnReason
+                        returnReason: returnReason,
+                        refund: true
                     };
 
                     sessionStorage.setItem("tempReturn", JSON.stringify(tempR));
+
+                    // Send tempReturn to MongoDB
+                    fetch('/api/returns', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(tempR),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Return saved to database:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error saving return to database:', error);
+                    });
+
                     alert("Your return reason and details have been saved.");
 
                     fetch('/delete-last-entry')
@@ -343,3 +379,4 @@
     </script>
 </body>
 </html>
+``` 
