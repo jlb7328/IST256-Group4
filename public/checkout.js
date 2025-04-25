@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.warn("Form element not found!!!");
         return;
     }
-    document.querySelector("form").addEventListener("submit", async function(event) {
+    form.addEventListener("submit", async function(event) {
         // Collect form data
         const formData = new FormData(event.target);
         const data = {};
