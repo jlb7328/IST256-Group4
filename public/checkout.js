@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
     form.addEventListener("submit", async function(event) {
+        event.preventDefault();
         // Collect form data
         const formData = new FormData(event.target);
         const data = {};
