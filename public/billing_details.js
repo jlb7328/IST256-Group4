@@ -1,4 +1,4 @@
-document.getElementById("checkout").addEventListener("click", function () {
+document.getElementById("checkout")?.addEventListener("click", function () {
     const personalizedReceipt = JSON.parse(sessionStorage.getItem("orderData") || "{}");
     const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
     const billInfo = JSON.parse(sessionStorage.getItem("billingData") || "{}");
