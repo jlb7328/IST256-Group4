@@ -1,7 +1,7 @@
 document.getElementById("checkout").addEventListener("click", function () {
-    const personalizedReceipt = JSON.parse(sessionStorage.getItem("orderData")) || {};
-    const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-    const billInfo = JSON.parse(sessionStorage.getItem("billingData")) || {};
+    const personalizedReceipt = JSON.parse(sessionStorage.getItem("orderData") || "{}");
+    const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+    const billInfo = JSON.parse(sessionStorage.getItem("billingData") || "{}");
 
     if (!Object.keys(personalizedReceipt).length || !cart.length || !Object.keys(billInfo).length) {
         console.error("Missing data: Ensure personalizedReceipt, cart, and billingData are available in sessionStorage.");
