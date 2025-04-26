@@ -1,13 +1,9 @@
 console.log("Script loaded");
 
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
-    if (!form) {
-        console.warn("Form element not found!!!");
-        return;
-    }
-    form.addEventListener("submit", async function(event) {
-        event.preventDefault();
+
+    document.querySelector("form").addEventListener("submit", async function(event) {
+
         // Collect form data
         const formData = new FormData(event.target);
         const data = {};
