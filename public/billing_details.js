@@ -42,6 +42,22 @@ document.getElementById("checkout").addEventListener("click", function () {
         if (response.ok) {
             console.log("Order data sent successfully!");
             sessionStorage.removeItem("cart");
+
+            // Check for accountId cookie and delete cart entry if it exists
+            const accountId = document.cookie.split('; ').find(row => row.startsWith('accountId='));
+            if (accountId) {
+                const accountIdValue = accountId.split('=')[1];
+                fetch(`/delete-cart?accountId=${accountIdValue}`, { method: 'DELETE' })
+                    .then(cartResponse => {
+                        if (cartResponse.ok) {
+                            console.log("Cart entry deleted successfully from the database.");
+                        } else {
+                            console.log("No matching cart entry found for deletion.");
+                        }
+                    })
+                    .catch(error => console.error("Error deleting cart entry:", error));
+            }
+
             window.location.href = "thx.html";
         } else {
             console.error("Failed to send order data.");

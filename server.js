@@ -258,6 +258,28 @@ app.post('/api/returns', async (req, res) => {
     }
 });
 
+app.delete('/delete-cart', async (req, res) => {
+    const { accountId } = req.query;
+
+    if (!accountId) {
+        return res.status(400).send({ error: 'Account ID is required.' });
+    }
+
+    try {
+        const deletedCart = await Cart.findOneAndDelete({ userID: accountId });
+        if (deletedCart) {
+            console.log("Cart entry deleted successfully for accountId:", accountId);
+            res.status(200).send({ message: 'Cart entry deleted successfully.' });
+        } else {
+            console.log("No matching cart entry found for accountId:", accountId);
+            res.status(404).send({ message: 'No matching cart entry found.' });
+        }
+    } catch (error) {
+        console.error('Error deleting cart entry:', error);
+        res.status(500).send({ error: 'Failed to delete cart entry.' });
+    }
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);  // notify user of server running.
 });
