@@ -68,6 +68,7 @@
             Checkout
             <span id="cart-count" class="cart-count">0</span>
         </button>
+        <button id="save-cart-button" class="scroll-button">Save Cart</button>
         <button id="restore-cart-button" class="scroll-button">Restore Cart</button>
 
         
@@ -185,83 +186,87 @@
     updateCartCount();
 
     document.getElementById("restore-cart-button").addEventListener("click", async function () {
-        const cartDownload = sessionStorage.getItem("cartDownload");
-        const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+    const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+    if (cart.length > 0) {
+        alert("You already have a cart.");
+        return;
+    }
 
-        if (cartDownload && cart.length > 0) {
-            alert("You have already restored your cart.");
+    // Check for accountId cookie
+    const cookies = document.cookie.split(";").map(cookie => cookie.trim());
+    const accountIdCookie = cookies.find(cookie => cookie.startsWith("accountId="));
+    if (!accountIdCookie) {
+        alert("No account ID found. Please log in to restore your cart.");
+        return;
+    }
+
+    const accountId = accountIdCookie.split("=")[1];
+    try {
+        // Fetch cart from the server
+        const response = await fetch(`/get-cart?accountId=${accountId}`);
+        if (response.ok) {
+            const cartData = await response.json();
+            if (cartData && cartData.length > 0) {
+                // Save the fetched cart to sessionStorage
+                sessionStorage.setItem("cartDownload", JSON.stringify(cartData));
+                
+                // Extract only the "items" array from the first object in "cartDownload"
+                const cartDownload = JSON.parse(sessionStorage.getItem("cartDownload"));
+                if (cartDownload[0] && cartDownload[0].items) {
+                    sessionStorage.setItem("cart", JSON.stringify(cartDownload[0].items));
+                    alert("Cart restored successfully!");
+                    location.reload(); // Reload to reflect the restored cart
+                } else {
+                    alert("No items found in the cart to restore.");
+                }
+            } else {
+                alert("No cart found for this account ID.");
+            }
+        } else {
+            alert("Failed to fetch cart from the server.");
+        }
+    } catch (error) {
+        console.error("Error fetching cart from server:", error);
+        alert("An error occurred while restoring the cart.");
+    }
+});
+
+    document.getElementById("save-cart-button").addEventListener("click", async function () {
+        // Check for accountId cookie
+        const cookies = document.cookie.split(";").map(cookie => cookie.trim());
+        const accountIdCookie = cookies.find(cookie => cookie.startsWith("accountId="));
+        if (!accountIdCookie) {
+            alert("You are not logged in.");
             return;
         }
 
-        if (cartDownload) {
-            sessionStorage.setItem("cart", cartDownload);
+        const accountId = accountIdCookie.split("=")[1];
+        const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
 
-            // Remove the accId variable from cart
-            const restoredCart = JSON.parse(sessionStorage.getItem("cart"));
-            if (restoredCart && restoredCart.accId) {
-                delete restoredCart.accId;
-                sessionStorage.setItem("cart", JSON.stringify(restoredCart));
-            }
+        if (cart.length === 0) {
+            alert("Your cart is empty. Nothing to save.");
+            return;
+        }
 
-            alert("Cart restored successfully!");
-            location.reload(); // Reload to reflect the restored cart
-        } else {
-            // Check for accountId cookie
-            const cookies = document.cookie.split(";").map(cookie => cookie.trim());
-            const accountIdCookie = cookies.find(cookie => cookie.startsWith("accountId="));
-            if (accountIdCookie) {
-                const accountId = accountIdCookie.split("=")[1];
-                alert(`Account ID found: ${accountId}`);
+        try {
+            // Save or update the cart in the database
+            const response = await fetch('/save-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ accId: accountId, items: cart }),
+            });
 
-                // Fetch cart from MongoDB using accountId
-                try {
-                    const response = await fetch(`/get-cart?accountId=${accountId}`);
-                    if (response.ok) {
-                        const cartData = await response.json();
-                        if (cartData && cartData.items) {
-                            sessionStorage.setItem("cart", JSON.stringify(cartData.items));
-                            alert("Cart restored successfully from server!");
-                            location.reload(); // Reload to reflect the restored cart
-                        } else {
-                            alert("No cart found for this account ID.");
-                            // Check if a cart exists in sessionStorage or is empty
-                            const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-                            if (cart.length > 0) {
-                                // Create cartDownload in sessionStorage without modifying the original cart
-                                const cartDownload = { items: cart, accId: accountId };
-                                sessionStorage.setItem("cartDownload", JSON.stringify(cartDownload));
-
-                                // Send cartDownload to the database
-                                try {
-                                    const saveResponse = await fetch('/save-cart', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                        },
-                                        body: JSON.stringify(cartDownload),
-                                    });
-
-                                    if (saveResponse.ok) {
-                                        alert("Cart saved to the database successfully.");
-                                    } else {
-                                        alert("Failed to save cart to the database.");
-                                    }
-                                } catch (error) {
-                                    console.error("Error saving cart to the database:", error);
-                                    alert("An error occurred while saving the cart to the database.");
-                                }
-                            } else {
-                                alert("Failed to fetch cart from server and no cart exists in sessionStorage.");
-                            }
-                        }
-                    }
-                } catch (error) {
-                    console.error("Error fetching cart from server:", error);
-                    alert("An error occurred while restoring the cart.");
-                }
+            if (response.ok) {
+                alert("Cart saved successfully!");
             } else {
-                alert("No saved cart found and no account ID cookie exists. Create an account to use this feature.");
+                const errorData = await response.json();
+                alert(`Failed to save cart: ${errorData.error}`);
             }
+        } catch (error) {
+            console.error("Error saving cart:", error);
+            alert("An error occurred while saving the cart.");
         }
     });
 

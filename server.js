@@ -204,7 +204,7 @@ app.get('/get-cart', async (req, res) => {
     }
 
     try {
-        const cart = await Cart.where("accId").equals(accountId);
+        const cart = await Cart.where("userID").equals(accountId);
         if (cart) {
             res.status(200).send(cart);
         } else {
@@ -229,12 +229,14 @@ app.post('/save-cart', async (req, res) => {
             // Update the existing cart
             existingCart.items = items;
             existingCart.savedAt = new Date();
-            await existingCart.save().then(() => console.log("Cart updated successfully!"));
+            await existingCart.save();
+            console.log("Cart updated successfully!");
             res.status(200).send({ message: 'Cart updated successfully.' });
         } else {
             // Create a new cart
             const newCart = new Cart({ userID: accId, items });
-            await newCart.save().then(() => console.log("Cart created successfully!"));
+            await newCart.save();
+            console.log("Cart created successfully!");
             res.status(201).send({ message: 'Cart saved successfully.' });
         }
     } catch (error) {
