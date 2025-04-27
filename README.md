@@ -19,4 +19,7 @@ Submission 5:
   Was incredibly large and involved many many many different changes, including underlying code from everything. Server properly uses node.js and some middleware code to properly work its magic to deliver a seemless shopping experience (whew that took all week)
 
 Submission 6:
-  
+  Finally started getting a grasp of the database integration and things (although slowly) started coming together and started having a rythem to them
+
+  Final Submit:
+    Not much was changed, just some bug fixes in functionality. Final video was submitted. Good Work.
